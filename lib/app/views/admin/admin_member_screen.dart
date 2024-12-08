@@ -29,12 +29,12 @@ class AdminMemberScreen extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
             children: [
-              CustomTextField(
-                controller: memberController.searchController,
-                hintText: 'Search...',
-                suffixIcon: const Icon(Icons.search),
-              ),
-              const SizedBox(height: 24.0),
+              // CustomTextField(
+              //   controller: memberController.searchController,
+              //   hintText: 'Search...',
+              //   suffixIcon: const Icon(Icons.search),
+              // ),
+              // const SizedBox(height: 24.0),
               Obx(
                 () => ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),

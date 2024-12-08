@@ -38,7 +38,7 @@ class _AdminSumaryTaskDetailScreenState
           itemBuilder: (context, index) {
             final data = taskController.filteredTasks[index];
             return CustomTaskCard(
-              onTap: () => Get.to(MemberTaskDetailScreen(taskModel: data),
+              onTap: () => Get.to(AdminTaskDetailScreen(taskModel: data),
                   transition: Transition.rightToLeft),
               taskModel: data,
               userName:

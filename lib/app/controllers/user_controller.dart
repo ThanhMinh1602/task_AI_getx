@@ -117,18 +117,15 @@ class UserController extends GetxController {
     }
   }
 
-  void getUserById() async {
+  Future<UserModel?> getUserById() async {
     try {
       final userId = await SharedPrefService.getUserId();
-      UserModel? user = await _userRepository.getUserById(userId!);
-      if (user != null) {
-        initializeMember(user);
-      } else {
-        EasyLoading.showError("User not found!");
-      }
+
+      return await _userRepository.getUserById(userId!);
     } catch (e) {
       EasyLoading.showError("An error occurred: ${e.toString()}");
     }
+    return null;
   }
 
   @override

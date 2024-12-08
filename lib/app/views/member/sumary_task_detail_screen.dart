@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/controllers/task_controller.dart';
-import 'package:task/app/views/admin/admin_task_detail_screen.dart';
 import 'package:task/app/views/member/member_task_detail_screen.dart';
 import 'package:task/core/widgets/custom_appbar.dart';
 import 'package:task/core/widgets/custom_background.dart';

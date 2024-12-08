@@ -20,19 +20,15 @@ class _MemberMainState extends State<MemberMain> {
   int currentIndex = 0;
   @override
   void initState() {
+    Get.find<TaskController>().onInit();
+    Get.find<UserController>().onInit();
     super.initState();
   }
 
-  void _refreshData() {
-    if (currentIndex == 0) {
-      Get.find<TaskController>().onInit();
-    } else if (currentIndex == 1) {
-      Get.find<UserController>().onInit();
-    }
-  }
-
+  final currentRouter = Get.currentRoute;
   @override
   Widget build(BuildContext context) {
+    print('currentRouter$currentRouter');
     return Scaffold(
       appBar: CustomAppbar(isMain: true),
       body: IndexedStack(
@@ -49,7 +45,6 @@ class _MemberMainState extends State<MemberMain> {
           setState(() {
             currentIndex = value;
           });
-          _refreshData();
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

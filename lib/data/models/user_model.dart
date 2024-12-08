@@ -77,7 +77,7 @@ class UserModel {
       role: role ?? this.role,
       createdAt: createdAt,
       updatedAt:
-          updatedAt ?? Timestamp.fromDate(DateTime.now()), // Cập nhật updatedAt
+          updatedAt ?? Timestamp.fromDate(DateTime.now()), 
     );
   }
 }

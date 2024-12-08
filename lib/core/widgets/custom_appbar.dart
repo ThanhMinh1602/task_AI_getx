@@ -16,43 +16,48 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final UserController userController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return isMain
-        ? Container(
-            color: AppColor.kFFFFFF,
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hello ${userController.nameController.text}!',
-                          style: AppStyle.regular12),
-                      Text(StringFormat.formatDate(DateTime.now()),
-                          style: AppStyle.medium16)
-                    ],
+    if (isMain) {
+      return Container(
+        color: AppColor.kFFFFFF,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FutureBuilder(
+                    future: userController.getUserById(),
+                    builder: (context, snapshot) => Text(
+                        'Hello ${snapshot.data?.name}!',
+                        style: AppStyle.regular12),
                   ),
-                ),
-                GestureDetector(
-                    onTap: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CustomDialog(
-                                title: 'Logout',
-                                content: 'Bạn có chắc chắn mốn đăng xuất',
-                                onConfirm: authController.logout);
-                          },
-                        ),
-                    child: const Icon(Icons.login_outlined,
-                        color: AppColor.k0D101C)),
-              ],
+                  Text(StringFormat.formatDate(DateTime.now()),
+                      style: AppStyle.medium16)
+                ],
+              ),
             ),
-          )
-        : AppBar(
-            backgroundColor: AppColor.kFFFFFF,
-            title: Text(title ?? '--:--'),
-          );
+            GestureDetector(
+                onTap: () => showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CustomDialog(
+                            title: 'Logout',
+                            content: 'Bạn có chắc chắn mốn đăng xuất',
+                            onConfirm: authController.logout);
+                      },
+                    ),
+                child:
+                    const Icon(Icons.login_outlined, color: AppColor.k0D101C)),
+          ],
+        ),
+      );
+    } else {
+      return AppBar(
+        backgroundColor: AppColor.kFFFFFF,
+        title: Text(title ?? '--:--'),
+      );
+    }
   }
 
   @override

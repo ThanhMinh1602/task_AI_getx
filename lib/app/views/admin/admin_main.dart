@@ -16,13 +16,11 @@ class AdminMain extends StatefulWidget {
 
 class _AdminMainState extends State<AdminMain> {
   int currentIndex = 0;
-
-  void _refreshData() {
-    if (currentIndex == 0) {
-      Get.find<TaskController>().onInit();
-    } else if (currentIndex == 1) {
-      Get.find<UserController>().onInit();
-    }
+  @override
+  void initState() {
+    Get.find<TaskController>().onInit();
+    Get.find<UserController>().onInit();
+    super.initState();
   }
 
   @override
@@ -43,7 +41,6 @@ class _AdminMainState extends State<AdminMain> {
           setState(() {
             currentIndex = value;
           });
-          _refreshData();
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

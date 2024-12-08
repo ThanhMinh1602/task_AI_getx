@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/controllers/user_controller.dart';
+import 'package:task/app/views/member/change_password_screen.dart';
 import 'package:task/data/models/user_model.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
@@ -49,19 +50,34 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                       _buildTextField('Name', memberController.nameController,
                           validator: (value) =>
                               Validator.validateEmpty(value!)),
+                      const SizedBox(height: 24.0),
                       _buildTextField('Phone number',
                           memberController.phoneNumberController,
                           validator: (value) =>
                               Validator.validateEmpty(value!)),
+                      const SizedBox(height: 24.0),
                       _buildTextField('Email', memberController.emailController,
                           validator: (value) =>
                               Validator.validateEmail(value!)),
-                      _buildTextField(
-                          'Password', memberController.passwordController,
-                          isPassword: true,
-                          validator: (value) =>
-                              Validator.validatePassword(value!)),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 10),
+                      InkWell(
+                        onTap: () => Get.to(ChangePasswordScreen(),
+                            transition: Transition.rightToLeft),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text('Change Password!',
+                                style: AppStyle.medium14.copyWith(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                                    decorationThickness: 2,
+                                    decorationColor: Colors.blue)),
+                            const Icon(Icons.arrow_forward_sharp,
+                                size: 14.0, color: Colors.blue)
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24.0),
                       CustomButton(
                           label: 'Update',
                           onPressed: () {
@@ -90,7 +106,6 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
           isPassword: isPassword,
           validator: validator,
         ),
-        const SizedBox(height: 24.0),
       ],
     );
   }

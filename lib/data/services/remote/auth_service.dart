@@ -25,4 +25,31 @@ class AuthService implements IauthRepository {
       return null;
     }
   }
+
+  @override
+  Future<String> changePassword(
+      String userId, String oldPassword, String newPassword) async {
+    try {
+      final userDoc = _usersRef.doc(userId);
+      final snapshot = await userDoc.get();
+      if (!snapshot.exists) {
+        return 'User not found';
+      }
+      final user = UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+
+      if (user.password != oldPassword) {
+        return 'Incorrect old password';
+      }
+      if (oldPassword == newPassword) {
+        return 'New password must be different from the old password';
+      }
+
+      await userDoc.update({'password': newPassword});
+
+      return 'Password changed successfully';
+    } catch (e) {
+      print('Error changing password: $e');
+      return 'An unexpected error occurred';
+    }
+  }
 }
