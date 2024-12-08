@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/app/controllers/auth_controller.dart';
-import 'package:task/app/controllers/user_controller.dart';
+import 'package:task/app/modules/controllers/auth_controller.dart';
+import 'package:task/app/modules/controllers/user_controller.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/string_format.dart';
@@ -26,12 +26,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  FutureBuilder(
-                    future: userController.getUserById(),
-                    builder: (context, snapshot) => Text(
-                        'Hello ${snapshot.data?.name}!',
-                        style: AppStyle.regular12),
-                  ),
+                  const Text('Hello snapshot.data?.name}!',
+                      style: AppStyle.regular12),
                   Text(StringFormat.formatDate(DateTime.now()),
                       style: AppStyle.medium16)
                 ],
@@ -44,7 +40,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         return CustomDialog(
                             title: 'Logout',
                             content: 'Bạn có chắc chắn mốn đăng xuất',
-                            onConfirm: authController.logout);
+                            onConfirm: () {});
                       },
                     ),
                 child:

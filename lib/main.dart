@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:task/app/binding/app_binding.dart';
-import 'package:task/app/views/admin/admin_main.dart';
-import 'package:task/app/views/splash_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:task/firebase_options.dart';
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,16 +19,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(),
-        ),
-        builder: EasyLoading.init(),
-        initialBinding: AppBinding(),
-        home: const SplashScreen(),
-      ),
+    return GetMaterialApp(
+      title: 'Task Manager',
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.INITIAL,
+      getPages: AppPages.pages,
+      builder: EasyLoading.init(),
     );
   }
 }
