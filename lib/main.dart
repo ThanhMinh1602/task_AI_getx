@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:task/app/binding/app_binding.dart';
 import 'package:task/app/views/admin/admin_main.dart';
+import 'package:task/app/views/splash_screen.dart';
 import 'package:task/firebase_options.dart';
 
 void main() async {
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),
-        home: const AdminMain(),
         builder: EasyLoading.init(),
         initialBinding: AppBinding(),
+        home: const SplashScreen(),
       ),
     );
   }

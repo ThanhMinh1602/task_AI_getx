@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/controllers/task_controller.dart';
-import 'package:task/app/views/admin/admin_task_detail_screen.dart';
 import 'package:task/app/views/member/member_task_detail_screen.dart';
 import 'package:task/core/widgets/custom_appbar.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_task_card.dart';
 
-class AdminSumaryTaskDetailScreen extends StatefulWidget {
-  const AdminSumaryTaskDetailScreen({super.key, required this.status});
+class MemberSumaryTaskDetailScreen extends StatefulWidget {
+  const MemberSumaryTaskDetailScreen({super.key, required this.status});
   final String status;
 
   @override
-  State<AdminSumaryTaskDetailScreen> createState() =>
-      _AdminSumaryTaskDetailScreenState();
+  State<MemberSumaryTaskDetailScreen> createState() =>
+      _MemberSumaryTaskDetailScreenState();
 }
 
-class _AdminSumaryTaskDetailScreenState
-    extends State<AdminSumaryTaskDetailScreen> {
+class _MemberSumaryTaskDetailScreenState
+    extends State<MemberSumaryTaskDetailScreen> {
   final TaskController taskController = Get.find<TaskController>();
 
   @override

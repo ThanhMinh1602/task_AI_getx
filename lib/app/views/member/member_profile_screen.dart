@@ -6,24 +6,21 @@ import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/extensions/build_context_extension.dart';
 import 'package:task/core/utils/validator.dart';
-import 'package:task/core/widgets/custom_appbar.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_button.dart';
 import 'package:task/core/widgets/custom_card.dart';
-import 'package:task/core/widgets/custom_dialog.dart';
 import 'package:task/core/widgets/custom_text_field.dart';
 import 'package:task/gen/assets.gen.dart';
 
-class AdminMemberDetailScreen extends StatefulWidget {
-  const AdminMemberDetailScreen({super.key, this.userModel});
+class MemberProfileScreen extends StatefulWidget {
+  const MemberProfileScreen({super.key, this.userModel});
   final UserModel? userModel;
 
   @override
-  State<AdminMemberDetailScreen> createState() =>
-      _AdminMemberDetailScreenState();
+  State<MemberProfileScreen> createState() => _MemberProfileScreenState();
 }
 
-class _AdminMemberDetailScreenState extends State<AdminMemberDetailScreen> {
+class _MemberProfileScreenState extends State<MemberProfileScreen> {
   final UserController memberController = Get.find<UserController>();
 
   @override
@@ -38,7 +35,6 @@ class _AdminMemberDetailScreenState extends State<AdminMemberDetailScreen> {
       onTap: () => context.unFocus,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: CustomAppbar(title: widget.userModel?.name ?? 'Add new member'),
         body: CustomBackground(
           child: SingleChildScrollView(
             child: Padding(
@@ -66,47 +62,11 @@ class _AdminMemberDetailScreenState extends State<AdminMemberDetailScreen> {
                           validator: (value) =>
                               Validator.validatePassword(value!)),
                       const SizedBox(height: 24),
-                      if (widget.userModel != null)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomButton(
-                                label: 'Delete',
-                                backgroundColor: Colors.red,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    useRootNavigator: true,
-                                    builder: (context) {
-                                      return CustomDialog(
-                                        title: 'Delete',
-                                        content:
-                                            'Are you sure you want to delete?',
-                                        onConfirm: () => memberController
-                                            .deleteUser(widget.userModel!.id),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 10.0),
-                            Expanded(
-                              child: CustomButton(
-                                  label: 'Update',
-                                  onPressed: () {
-                                    memberController
-                                        .updateUser(widget.userModel!.id);
-                                  }),
-                            ),
-                          ],
-                        )
-                      else
-                        CustomButton(
-                            label: 'Add new member',
-                            onPressed: () {
-                              memberController.addUser();
-                            }),
+                      CustomButton(
+                          label: 'Update',
+                          onPressed: () {
+                            memberController.update();
+                          }),
                     ],
                   ),
                 ),

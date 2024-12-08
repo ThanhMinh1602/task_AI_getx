@@ -40,6 +40,11 @@ class AppStyle {
       fontWeight: FontWeight.w500,
       letterSpacing: -0.2,
       color: AppColor.k0D101C);
+  static const TextStyle medium26 = TextStyle(
+      fontSize: 26,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2,
+      color: AppColor.k0D101C);
   static const TextStyle semibold12 = TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w500,

@@ -1,5 +1,5 @@
-import 'package:task/app/models/user_model.dart';
-import 'package:task/app/services/remote/user_service.dart';
+import 'package:task/data/models/user_model.dart';
+import 'package:task/data/services/remote/user_service.dart';
 
 abstract class IUserRepository {
   Future<UserModel?> addUser(UserModel user);

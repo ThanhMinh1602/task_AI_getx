@@ -39,15 +39,16 @@ dependencies:
   google_fonts: ^6.2.1
   intl: ^0.20.1
   page_transition: ^2.1.0
+  shared_preferences: ^2.3.3
   uuid: ^4.5.1
 
 dev_dependencies:
   build_runner: ^2.4.13
   flutter_gen_runner: ^5.8.0
   flutter_lints: ^4.0.0
-  integration_test:
-    sdk: flutter
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the

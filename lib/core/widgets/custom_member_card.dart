@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/widgets/custom_card.dart';
-import 'package:task/app/models/user_model.dart';
+import 'package:task/data/models/user_model.dart';
 import 'package:task/gen/assets.gen.dart';
 
 class CustomMemberCard extends StatelessWidget {

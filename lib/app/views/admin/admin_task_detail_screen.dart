@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/controllers/task_controller.dart';
-import 'package:task/app/models/task_model.dart';
+import 'package:task/data/models/task_model.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/extensions/build_context_extension.dart';

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:task/app/models/status_model.dart';
-import 'package:task/app/models/task_model.dart';
-import 'package:task/app/models/user_model.dart';
-import 'package:task/app/repositories/task_repository.dart';
-import 'package:task/app/repositories/user_repository.dart';
+import 'package:task/data/models/status_model.dart';
+import 'package:task/data/models/task_model.dart';
+import 'package:task/data/models/user_model.dart';
+import 'package:task/data/repositories/task_repository.dart';
+import 'package:task/data/repositories/user_repository.dart';
 import 'package:task/core/utils/string_format.dart';
+import 'package:task/data/services/local/shared_pref_service.dart';
 
 class TaskController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -38,7 +39,10 @@ class TaskController extends GetxController {
   }
 
   void fetchData() async {
-    await Future.wait([_fetchUsers(), _fetchTasks()]);
+    await Future.wait([
+      _fetchUsers(),
+      _fetchTasks(),
+    ]);
   }
 
   Future<void> _fetchUsers() async {
@@ -52,10 +56,39 @@ class TaskController extends GetxController {
 
   Future<void> _fetchTasks() async {
     try {
+      final role = await SharedPrefService.getRole() ?? 'member';
+
+      if (role == 'member') {
+        await _fetchTasksForMember();
+      } else {
+        await _fetchTasksForAdmin();
+      }
+    } catch (e) {
+      EasyLoading.showError("Failed to fetch tasks: ${e.toString()}");
+    }
+  }
+
+  Future<void> _fetchTasksForMember() async {
+    try {
+      final userId = await SharedPrefService.getUserId();
+      if (userId != null) {
+        final fetchedTasks = await _taskRepository.getAllTasksByUser(userId);
+        tasks.assignAll(fetchedTasks);
+      } else {
+        EasyLoading.showError("User ID not found.");
+      }
+    } catch (e) {
+      EasyLoading.showError(
+          "Failed to fetch tasks for member: ${e.toString()}");
+    }
+  }
+
+  Future<void> _fetchTasksForAdmin() async {
+    try {
       final fetchedTasks = await _taskRepository.getAllTasks();
       tasks.assignAll(fetchedTasks);
     } catch (e) {
-      EasyLoading.showError("Failed to fetch tasks: $e");
+      EasyLoading.showError("Failed to fetch tasks for admin: ${e.toString()}");
     }
   }
 
@@ -92,12 +125,9 @@ class TaskController extends GetxController {
       selectedStatus.value = newStatus ?? '';
 
   String getUserNameById(String userId) {
-    // Lọc danh sách các nhiệm vụ (tasks) với assignTo trùng với userId
     final user = users.firstWhere(
       (task) => task.id == userId,
     );
-
-    // Nếu tìm thấy task, trả về tên của người dùng, nếu không trả về "Unknown"
     return user.name;
   }
 

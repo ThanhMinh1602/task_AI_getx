@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:task/app/models/task_model.dart';
-import 'package:task/app/repositories/task_repository.dart';
+import 'package:task/data/models/task_model.dart';
+import 'package:task/data/repositories/task_repository.dart';
 
 class TaskService implements ITaskRepository {
   final CollectionReference _tasksRef =

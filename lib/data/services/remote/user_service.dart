@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:task/app/models/user_model.dart';
-import 'package:task/app/repositories/user_repository.dart';
+import 'package:task/data/models/user_model.dart';
+import 'package:task/data/repositories/user_repository.dart';
 
 class UserService implements IUserRepository {
   final CollectionReference _usersRef =

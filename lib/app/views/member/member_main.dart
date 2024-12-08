@@ -4,18 +4,24 @@ import 'package:task/app/controllers/user_controller.dart';
 import 'package:task/app/controllers/task_controller.dart';
 import 'package:task/app/views/admin/admin_member_screen.dart';
 import 'package:task/app/views/admin/admin_task_screen.dart';
+import 'package:task/app/views/member/member_profile_screen.dart';
+import 'package:task/app/views/member/member_task_screen.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/widgets/custom_appbar.dart';
 
-class AdminMain extends StatefulWidget {
-  const AdminMain({super.key});
+class MemberMain extends StatefulWidget {
+  const MemberMain({super.key});
 
   @override
-  State<AdminMain> createState() => _AdminMainState();
+  State<MemberMain> createState() => _MemberMainState();
 }
 
-class _AdminMainState extends State<AdminMain> {
+class _MemberMainState extends State<MemberMain> {
   int currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _refreshData() {
     if (currentIndex == 0) {
@@ -32,8 +38,8 @@ class _AdminMainState extends State<AdminMain> {
       body: IndexedStack(
         index: currentIndex,
         children: [
-          AdminTaskScreen(),
-          AdminMemberScreen(),
+          MemberTaskScreen(),
+          MemberProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

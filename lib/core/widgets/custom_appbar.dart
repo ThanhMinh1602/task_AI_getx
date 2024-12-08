@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task/app/controllers/auth_controller.dart';
+import 'package:task/app/controllers/user_controller.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/string_format.dart';
+import 'package:task/core/widgets/custom_dialog.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, this.isMain = false, this.title});
+  CustomAppbar({super.key, this.isMain = false, this.title});
   final bool isMain;
   final String? title;
+
+  final AuthController authController = Get.find();
+  final UserController userController = Get.find();
   @override
   Widget build(BuildContext context) {
     return isMain
@@ -20,14 +27,25 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Good morning Andre!',
+                      Text('Hello ${userController.nameController.text}!',
                           style: AppStyle.regular12),
                       Text(StringFormat.formatDate(DateTime.now()),
                           style: AppStyle.medium16)
                     ],
                   ),
                 ),
-                const Icon(Icons.notifications_sharp, color: AppColor.k0D101C)
+                GestureDetector(
+                    onTap: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomDialog(
+                                title: 'Logout',
+                                content: 'Bạn có chắc chắn mốn đăng xuất',
+                                onConfirm: authController.logout);
+                          },
+                        ),
+                    child: const Icon(Icons.login_outlined,
+                        color: AppColor.k0D101C)),
               ],
             ),
           )

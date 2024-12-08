@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:task/app/models/user_model.dart';
-import 'package:task/app/repositories/user_repository.dart'; // Import IUserRepository
+import 'package:task/data/models/user_model.dart';
+import 'package:task/data/repositories/user_repository.dart';
+import 'package:task/data/services/local/shared_pref_service.dart'; // Import IUserRepository
 
 class UserController extends GetxController {
   // TextEditingControllers
@@ -24,6 +25,7 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     getAllUser();
+    getUserById();
   }
 
   @override
@@ -110,6 +112,20 @@ class UserController extends GetxController {
       EasyLoading.showSuccess('User deleted successfully!');
       Get.back();
       refresh();
+    } catch (e) {
+      EasyLoading.showError("An error occurred: ${e.toString()}");
+    }
+  }
+
+  void getUserById() async {
+    try {
+      final userId = await SharedPrefService.getUserId();
+      UserModel? user = await _userRepository.getUserById(userId!);
+      if (user != null) {
+        initializeMember(user);
+      } else {
+        EasyLoading.showError("User not found!");
+      }
     } catch (e) {
       EasyLoading.showError("An error occurred: ${e.toString()}");
     }

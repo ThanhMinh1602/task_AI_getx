@@ -1,5 +1,5 @@
-import 'package:task/app/models/task_model.dart';
-import 'package:task/app/services/remote/task_service.dart';
+import 'package:task/data/models/task_model.dart';
+import 'package:task/data/services/remote/task_service.dart';
 
 abstract class ITaskRepository {
   Future<TaskModel?> addTask(TaskModel task);

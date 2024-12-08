@@ -3,7 +3,7 @@ import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/app_utils.dart';
 import 'package:task/core/widgets/custom_card.dart';
 import 'package:task/core/widgets/custom_status_box.dart';
-import 'package:task/app/models/task_model.dart';
+import 'package:task/data/models/task_model.dart';
 
 class CustomTaskCard extends StatelessWidget {
   const CustomTaskCard(
