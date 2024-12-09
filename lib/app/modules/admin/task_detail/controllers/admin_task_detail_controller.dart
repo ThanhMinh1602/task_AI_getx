@@ -72,37 +72,53 @@ class AdminTaskDetailController extends GetxController {
   }
 
   Future<void> createTask() async {
-    final taskCreate = TaskModel(
-      title: titleController.text,
-      description: descriptionController.text,
-      assignTo: assignToSelected.value,
-      dueDate: dueDateController.text,
-      status: statusSelected.value,
-    );
-    EasyLoading.show(status: 'Creating...');
-    await _taskRepository.create(taskCreate);
-    EasyLoading.showSuccess('Created');
-    Get.back(result: true);
+    if (formKey.currentState!.validate()) {
+      final taskCreate = TaskModel(
+        title: titleController.text,
+        description: descriptionController.text,
+        assignTo: assignToSelected.value,
+        dueDate: dueDateController.text,
+        status: statusSelected.value,
+      );
+      EasyLoading.show(status: 'Creating...');
+      final result = await _taskRepository.create(taskCreate);
+      if (result != null) {
+        EasyLoading.showSuccess('Created');
+        Get.back(result: true);
+      } else {
+        EasyLoading.showError('Failed to create task');
+      }
+    }
   }
 
   Future<void> updateTask() async {
-    final taskUpdate = task.value.copyWith(
-      title: titleController.text,
-      description: descriptionController.text,
-      assignTo: assignToSelected.value,
-      dueDate: dueDateController.text,
-      status: statusSelected.value,
-    );
-    EasyLoading.show(status: 'Updating...');
-    await _taskRepository.update(taskUpdate);
-    EasyLoading.showSuccess('Updated');
-    Get.back(result: true);
+    if (formKey.currentState!.validate()) {
+      final taskUpdate = task.value.copyWith(
+        title: titleController.text,
+        description: descriptionController.text,
+        assignTo: assignToSelected.value,
+        dueDate: dueDateController.text,
+        status: statusSelected.value,
+      );
+      EasyLoading.show(status: 'Updating...');
+      final result = await _taskRepository.update(taskUpdate);
+      if (result != null) {
+        EasyLoading.showSuccess('Updated');
+        Get.back(result: true);
+      } else {
+        EasyLoading.showError('Failed to update task');
+      }
+    }
   }
 
   Future<void> deleteTask() async {
     EasyLoading.show(status: 'Deleting...');
-    await _taskRepository.delete(task.value.id);
-    EasyLoading.showSuccess('Deleted');
-    Get.back(result: true);
+    final result = await _taskRepository.delete(task.value.id);
+    if (result) {
+      EasyLoading.showSuccess('Deleted');
+      Get.back(result: true);
+    } else {
+      EasyLoading.showError('Failed to delete task');
+    }
   }
 }

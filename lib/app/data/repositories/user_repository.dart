@@ -5,7 +5,7 @@ import 'base/base_repository.dart';
 
 abstract class IUserRepository extends IBaseRepository<UserModel> {
   Future<UserModel?> getUserByEmail(String email);
-  Future<void> deleteUserAndTasks(String userId);
+  Future<bool> deleteUserAndTasks(String userId);
 }
 
 class UserRepositoryImpl extends BaseRepository<UserModel>
@@ -77,11 +77,13 @@ class UserRepositoryImpl extends BaseRepository<UserModel>
   }
 
   @override
-  Future<void> deleteUserAndTasks(String userId) async {
+  Future<bool> deleteUserAndTasks(String userId) async {
     try {
       await _userService.deleteUserAndTasks(userId);
+      return true;
     } catch (e) {
       print('Error in UserRepository.deleteUserAndTasks: $e');
+      return false;
     }
   }
 }

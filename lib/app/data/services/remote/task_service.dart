@@ -57,14 +57,14 @@ class TaskService extends BaseService<TaskModel> {
   }
 
   @override
-  Future<TaskModel?> update(TaskModel task) async {
+  Future<TaskModel?> update(TaskModel model) async {
     try {
-      final taskDoc = await collection.doc(task.id).get();
+      final taskDoc = await collection.doc(model.id).get();
       if (!taskDoc.exists) {
         print('Task not found');
         return null;
       }
-      return super.update(task);
+      return super.update(model);
     } catch (e) {
       print('Error in TaskService.update: $e');
       return null;

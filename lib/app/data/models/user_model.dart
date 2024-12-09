@@ -17,7 +17,7 @@ class UserModel extends BaseModel {
     this.phoneNumber,
     this.password,
     this.avatarUrl,
-    this.role,
+    this.role = 'member',
     Timestamp? createdAt,
     Timestamp? updatedAt,
   }) : super(

@@ -14,49 +14,53 @@ class CustomTaskCard extends StatelessWidget {
   final AdminTaskController taskController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: CustomCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(taskModel.title ?? '--:--', style: AppStyle.medium16),
-            const SizedBox(height: 5.0),
-            Text(
-              taskModel.description ?? '--:--',
-              style: AppStyle.regular12,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 10.0),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildIconText(
-                          icon: Icons.calendar_month_outlined,
-                          title: taskModel.dueDate ?? '--:--'),
-                      const SizedBox(height: 5.0),
-                      if (taskModel.assignTo != null)
+    return Obx(() {
+      print('taskModel ${taskModel.assignTo}');
+      return GestureDetector(
+        onTap: onTap,
+        child: CustomCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(taskModel.title ?? '--:--', style: AppStyle.medium16),
+              const SizedBox(height: 5.0),
+              Text(
+                taskModel.description ?? '--:--',
+                style: AppStyle.regular12,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 10.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         _buildIconText(
-                            icon: Icons.person_outline_outlined,
-                            title: taskController
-                                .getNameMemberByTask(taskModel.assignTo!))
-                    ],
+                            icon: Icons.calendar_month_outlined,
+                            title: taskModel.dueDate ?? '--:--'),
+                        const SizedBox(height: 5.0),
+                        if (taskModel.assignTo != null)
+                          _buildIconText(
+                              icon: Icons.person_outline_outlined,
+                              title: taskController
+                                  .getNameMemberByTask(taskModel.assignTo!))
+                      ],
+                    ),
                   ),
-                ),
-                CustomStatusBox(
-                  status: taskModel.status ?? '--:--',
-                  color: AppUtils.getStatusColors(taskModel.status ?? '--:--'),
-                )
-              ],
-            )
-          ],
+                  CustomStatusBox(
+                    status: taskModel.status ?? '--:--',
+                    color:
+                        AppUtils.getStatusColors(taskModel.status ?? '--:--'),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildIconText({required String title, required IconData icon}) {

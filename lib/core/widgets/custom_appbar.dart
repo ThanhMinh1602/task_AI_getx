@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task/app/modules/admin/main/controllers/admin_main_controller.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/string_format.dart';
@@ -36,7 +37,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         return CustomDialog(
                             title: 'Logout',
                             content: 'Bạn có chắc chắn mốn đăng xuất',
-                            onConfirm: () {});
+                            onConfirm: () {
+                              Get.find<AdminMainController>().logOut();
+                            });
                       },
                     ),
                 child:

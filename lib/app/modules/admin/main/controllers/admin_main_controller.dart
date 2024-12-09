@@ -12,4 +12,8 @@ class AdminMainController extends GetxController {
       Get.toNamed(AppRoutes.ADMIN_MEMBER);
     }
   }
+
+  void logOut() {
+    Get.offAllNamed(AppRoutes.LOGIN);
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/main/binding/admin_main_binding.dart';
 import 'package:task/app/modules/admin/main/views/admin_main_screen.dart';
+import 'package:task/app/modules/admin/member/binding/admin_member_binding.dart';
 import 'package:task/app/modules/admin/member_detail/binding/admin_member_detail_binding.dart';
 import 'package:task/app/modules/admin/member_detail/views/admin_member_detail_screen.dart';
 import 'package:task/app/modules/admin/summary/binding/admin_summary_binding.dart';
@@ -38,11 +39,12 @@ class AppPages {
         AdminSummaryBinding(),
         AdminMemberDetailBinding(),
         AdminTaskDetailBinding(),
+        AdminMemberBinding(),
       ],
     ),
     GetPage(
       name: AppRoutes.ADMIN_MEMBER_DETAIL,
-      page: () => const AdminMemberDetailScreen(),
+      page: () => AdminMemberDetailScreen(),
       binding: AdminMemberDetailBinding(),
     ),
     GetPage(

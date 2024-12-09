@@ -29,7 +29,6 @@ class UserService extends BaseService<UserModel> {
   @override
   Future<UserModel?> create(UserModel userModel) async {
     try {
-      // Check if email already exists
       final existingUser = await getUserByEmail(userModel.email!);
       if (existingUser != null) {
         print('User with this email already exists');
@@ -46,11 +45,8 @@ class UserService extends BaseService<UserModel> {
   Future<void> deleteUserAndTasks(String userId) async {
     try {
       final batch = FirebaseProvider.batch;
-
-      // Delete user
       batch.delete(collection.doc(userId));
 
-      // Delete related tasks
       final tasksSnapshot = await FirebaseProvider.tasksCollection
           .where('assignTo', isEqualTo: userId)
           .get();
@@ -81,17 +77,5 @@ class UserService extends BaseService<UserModel> {
       print('Error in UserService.getAll: $e');
       return [];
     }
-  }
-
-  @override
-  Future<UserModel?> getById(String id) {
-    // TODO: implement getById
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserModel?> update(UserModel model) {
-    // TODO: implement update
-    throw UnimplementedError();
   }
 }
