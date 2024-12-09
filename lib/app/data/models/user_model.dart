@@ -3,21 +3,21 @@ import 'package:uuid/uuid.dart';
 import 'base/base_model.dart';
 
 class UserModel extends BaseModel {
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String avatarUrl;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final String? avatarUrl;
   final String? password;
-  final String role;
+  final String? role;
 
   UserModel({
     String? id,
-    required this.name,
-    required this.email,
-    required this.phoneNumber,
+    this.name,
+    this.email,
+    this.phoneNumber,
     this.password,
-    this.avatarUrl = '',
-    this.role = 'member',
+    this.avatarUrl,
+    this.role,
     Timestamp? createdAt,
     Timestamp? updatedAt,
   }) : super(
@@ -43,18 +43,18 @@ class UserModel extends BaseModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'],
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      phoneNumber: json['phoneNumber'] ?? '',
-      avatarUrl: json['avatarUrl'] ?? '',
-      password: json['password'],
-      role: json['role'] ?? 'member',
-      createdAt: json['createdAt'] is Timestamp 
-          ? json['createdAt'] 
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
+      password: json['password'] as String?,
+      role: json['role'] as String?,
+      createdAt: json['createdAt'] is Timestamp
+          ? json['createdAt'] as Timestamp
           : BaseModel.getCurrentTimestamp(),
-      updatedAt: json['updatedAt'] is Timestamp 
-          ? json['updatedAt'] 
+      updatedAt: json['updatedAt'] is Timestamp
+          ? json['updatedAt'] as Timestamp
           : BaseModel.getCurrentTimestamp(),
     );
   }
@@ -79,4 +79,4 @@ class UserModel extends BaseModel {
       updatedAt: BaseModel.getCurrentTimestamp(),
     );
   }
-} 
+}

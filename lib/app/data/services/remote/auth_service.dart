@@ -1,28 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:task/app/data/models/user_model.dart';
 import 'package:task/app/data/providers/firebase_provider.dart';
-import 'package:task/core/enum/auth_status.dart';
 
 class AuthService {
   final CollectionReference _usersRef = FirebaseProvider.usersCollection;
 
-  Future<AuthStatus> login(String email, String password) async {
+  Future<UserModel?> login(String email, String password) async {
     try {
-      final querySnapshot = await _usersRef
-          .where('email', isEqualTo: email)
-          .where('password', isEqualTo: password)
-          .limit(1)
-          .get();
+      final querySnapshot =
+          await _usersRef.where('email', isEqualTo: email).limit(1).get();
       if (querySnapshot.docs.isEmpty) {
-        return AuthStatus.failure;
+        return null;
       }
-      return AuthStatus.success;
+      final userData = querySnapshot.docs.first.data() as Map<String, dynamic>;
+      if (userData['password'] != password) {
+        return null;
+      }
+      return UserModel.fromJson(userData);
     } catch (e) {
       print('Error in AuthService.login: $e');
-      return AuthStatus.error;
+      return null;
     }
   }
 
-  Future<AuthStatus> changePassword(
+  Future<String> changePassword(
     String userId,
     String oldPassword,
     String newPassword,
@@ -31,23 +32,23 @@ class AuthService {
       final userDoc = await _usersRef.doc(userId).get();
 
       if (!userDoc.exists) {
-        return AuthStatus.userNotFound;
+        return 'User not found';
       }
 
       final userData = userDoc.data() as Map<String, dynamic>;
       if (userData['password'] != oldPassword) {
-        return AuthStatus.incorrectPassword;
+        return 'Incorrect password';
       }
 
       if (oldPassword == newPassword) {
-        return AuthStatus.samePassword;
+        return 'Same password';
       }
 
       await _usersRef.doc(userId).update({'password': newPassword});
-      return AuthStatus.passwordChanged;
+      return 'Password changed';
     } catch (e) {
       print('Error in AuthService.changePassword: $e');
-      return AuthStatus.error;
+      return 'Error';
     }
   }
 }

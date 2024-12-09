@@ -3,19 +3,19 @@ import 'package:uuid/uuid.dart';
 import 'base/base_model.dart';
 
 class TaskModel extends BaseModel {
-  final String title;
-  final String description;
-  final String dueDate;
-  final String status;
-  final String assignTo;
+  final String? title;
+  final String? description;
+  final String? dueDate;
+  final String? status;
+  final String? assignTo;
 
   TaskModel({
     String? id,
-    required this.title,
-    required this.description,
-    required this.dueDate,
-    required this.status,
-    required this.assignTo,
+    this.title,
+    this.description,
+    this.dueDate,
+    this.status,
+    this.assignTo,
     Timestamp? createdAt,
     Timestamp? updatedAt,
   }) : super(
@@ -40,17 +40,17 @@ class TaskModel extends BaseModel {
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
     return TaskModel(
-      id: json['id'],
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      dueDate: json['dueDate'] ?? '',
-      status: json['status'] ?? 'Open',
-      assignTo: json['assignTo'] ?? '',
-      createdAt: json['createdAt'] is Timestamp 
-          ? json['createdAt'] 
+      id: json['id'] as String?,
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      dueDate: json['dueDate'] as String?,
+      status: json['status'] as String?,
+      assignTo: json['assignTo'] as String?,
+      createdAt: json['createdAt'] is Timestamp
+          ? json['createdAt'] as Timestamp
           : BaseModel.getCurrentTimestamp(),
-      updatedAt: json['updatedAt'] is Timestamp 
-          ? json['updatedAt'] 
+      updatedAt: json['updatedAt'] is Timestamp
+          ? json['updatedAt'] as Timestamp
           : BaseModel.getCurrentTimestamp(),
     );
   }
@@ -73,4 +73,4 @@ class TaskModel extends BaseModel {
       updatedAt: BaseModel.getCurrentTimestamp(),
     );
   }
-} 
+}

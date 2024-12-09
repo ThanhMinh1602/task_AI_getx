@@ -1,9 +1,9 @@
+import 'package:task/app/data/models/user_model.dart';
 import 'package:task/app/data/services/remote/auth_service.dart';
-import 'package:task/core/enum/auth_status.dart';
 
 abstract class IAuthRepository {
-  Future<AuthStatus> login(String email, String password);
-  Future<AuthStatus> changePassword(
+  Future<UserModel?> login(String email, String password);
+  Future<String> changePassword(
       String userId, String oldPassword, String newPassword);
 }
 
@@ -14,12 +14,12 @@ class AuthRepositoryImpl implements IAuthRepository {
       : _authService = authService;
 
   @override
-  Future<AuthStatus> login(String email, String password) async {
+  Future<UserModel?> login(String email, String password) async {
     return await _authService.login(email, password);
   }
 
   @override
-  Future<AuthStatus> changePassword(
+  Future<String> changePassword(
     String userId,
     String oldPassword,
     String newPassword,

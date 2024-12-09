@@ -19,9 +19,9 @@ class CustomMemberCard extends StatelessWidget {
           CircleAvatar(
             radius: 30.0,
             backgroundColor: AppColor.kFFFFFF,
-            backgroundImage: userModel.avatarUrl.isEmpty
-                ? AssetImage(Assets.images.avatarNull.path)
-                : NetworkImage(userModel.avatarUrl),
+            backgroundImage: userModel.avatarUrl != null
+                ? NetworkImage(userModel.avatarUrl!)
+                : AssetImage(Assets.images.avatarNull.path),
           ),
           const SizedBox(width: 12.0),
           Expanded(

@@ -30,7 +30,6 @@ class TaskService extends BaseService<TaskModel> {
           .where('status', isEqualTo: status)
           .orderBy('createdAt', descending: true)
           .get();
-
       return querySnapshot.docs
           .map((doc) => TaskModel.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
@@ -43,7 +42,6 @@ class TaskService extends BaseService<TaskModel> {
   @override
   Future<TaskModel?> create(TaskModel task) async {
     try {
-      // Check if task with same title exists
       final existingTask =
           await collection.where('title', isEqualTo: task.title).limit(1).get();
 
@@ -51,7 +49,6 @@ class TaskService extends BaseService<TaskModel> {
         print('Task with this title already exists');
         return null;
       }
-
       return super.create(task);
     } catch (e) {
       print('Error in TaskService.create: $e');
@@ -75,9 +72,8 @@ class TaskService extends BaseService<TaskModel> {
   }
 
   @override
-  Future<List<TaskModel>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<TaskModel>> getAll() async {
+    return await super.getAll();
   }
 
   @override

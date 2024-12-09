@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:task/app/data/models/task_model.dart';
+import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/app_utils.dart';
 import 'package:task/core/widgets/custom_card.dart';
 import 'package:task/core/widgets/custom_status_box.dart';
 
 class CustomTaskCard extends StatelessWidget {
-  const CustomTaskCard(
-      {super.key, required this.taskModel, this.onTap, this.userName});
+  CustomTaskCard({super.key, required this.taskModel, this.onTap});
   final TaskModel taskModel;
-  final String? userName;
   final void Function()? onTap;
-
+  final AdminTaskController taskController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,10 +20,10 @@ class CustomTaskCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(taskModel.title, style: AppStyle.medium16),
+            Text(taskModel.title ?? '--:--', style: AppStyle.medium16),
             const SizedBox(height: 5.0),
             Text(
-              taskModel.description,
+              taskModel.description ?? '--:--',
               style: AppStyle.regular12,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -37,18 +37,19 @@ class CustomTaskCard extends StatelessWidget {
                     children: [
                       _buildIconText(
                           icon: Icons.calendar_month_outlined,
-                          title: taskModel.dueDate),
+                          title: taskModel.dueDate ?? '--:--'),
                       const SizedBox(height: 5.0),
-                      if (userName != null)
+                      if (taskModel.assignTo != null)
                         _buildIconText(
                             icon: Icons.person_outline_outlined,
-                            title: userName!)
+                            title: taskController
+                                .getNameMemberByTask(taskModel.assignTo!))
                     ],
                   ),
                 ),
                 CustomStatusBox(
-                  status: taskModel.status,
-                  color: AppUtils.getStatusColors(taskModel.status),
+                  status: taskModel.status ?? '--:--',
+                  color: AppUtils.getStatusColors(taskModel.status ?? '--:--'),
                 )
               ],
             )

@@ -8,10 +8,7 @@ class CustomLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'LOGO',
-      child: Icon(Icons.task_alt,
-          size: size ?? 80, color: color ?? AppColor.k613BE7),
-    );
+    return Icon(Icons.task_alt,
+        size: size ?? 80, color: color ?? AppColor.k613BE7);
   }
 }

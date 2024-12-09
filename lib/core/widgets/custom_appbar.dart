@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/app/modules/controllers/auth_controller.dart';
-import 'package:task/app/modules/controllers/user_controller.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/string_format.dart';
 import 'package:task/core/widgets/custom_dialog.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  CustomAppbar({super.key, this.isMain = false, this.title});
+  const CustomAppbar({super.key, this.isMain = false, this.title});
   final bool isMain;
   final String? title;
 
-  final AuthController authController = Get.find();
-  final UserController userController = Get.find();
   @override
   Widget build(BuildContext context) {
     if (isMain) {
@@ -50,6 +46,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       );
     } else {
       return AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back(result: true);
+          },
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         backgroundColor: AppColor.kFFFFFF,
         title: Text(title ?? '--:--'),
       );

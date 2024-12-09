@@ -1,47 +1,59 @@
 import 'package:get/get.dart';
-import 'package:task/app/modules/bindings/auth_binding.dart';
-import 'package:task/app/modules/bindings/task_binding.dart';
-import 'package:task/app/modules/bindings/user_binding.dart';
-import 'package:task/app/modules/views/admin/admin_main.dart';
-import 'package:task/app/modules/views/login_screen.dart';
-import 'package:task/app/modules/views/member/member_main.dart';
-import 'package:task/app/modules/views/splash_screen.dart';
-import 'package:task/app/routes/app_routes.dart';
-
-// Import các module khác
+import 'package:task/app/modules/admin/main/binding/admin_main_binding.dart';
+import 'package:task/app/modules/admin/main/views/admin_main_screen.dart';
+import 'package:task/app/modules/admin/member_detail/binding/admin_member_detail_binding.dart';
+import 'package:task/app/modules/admin/member_detail/views/admin_member_detail_screen.dart';
+import 'package:task/app/modules/admin/summary/binding/admin_summary_binding.dart';
+import 'package:task/app/modules/admin/summary/view/admin_sumary_task_detail_screen.dart';
+import 'package:task/app/modules/admin/task/binding/admin_task_binding.dart';
+import 'package:task/app/modules/admin/task_detail/binding/admin_task_detail_binding.dart';
+import 'package:task/app/modules/admin/task_detail/views/admin_task_detail_screen.dart';
+import 'package:task/app/modules/login/binding/login_binding.dart';
+import 'package:task/app/modules/login/view/login_screen.dart';
+import 'package:task/app/modules/splash/binding/splash_binding.dart';
+import 'package:task/app/modules/splash/view/splash_screen.dart';
+// Import other views as needed
+import 'app_routes.dart';
 
 class AppPages {
+  static const INITIAL = AppRoutes.SPLASH;
+
   static final pages = [
     GetPage(
-      name: AppRoutes.INITIAL,
+      name: AppRoutes.SPLASH,
       page: () => const SplashScreen(),
-      bindings: [
-        AuthBinding(),
-        UserBinding(),
-      ],
+      binding: SplashBinding(),
     ),
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => LoginScreen(),
-      binding: AuthBinding(),
+      binding: LoginBinding(),
     ),
     GetPage(
-      name: AppRoutes.ADMIN_HOME,
-      page: () => const AdminMain(),
+      name: AppRoutes.ADMIN_MAIN,
+      page: () => AdminMainScreen(),
       bindings: [
-        AuthBinding(),
-        UserBinding(),
-        TaskBinding(),
+        AdminMainBinding(),
+        AdminTaskBinding(),
+        AdminSummaryBinding(),
+        AdminMemberDetailBinding(),
+        AdminTaskDetailBinding(),
       ],
     ),
     GetPage(
-      name: AppRoutes.MEMBER_HOME,
-      page: () => const MemberMain(),
-      bindings: [
-        AuthBinding(),
-        UserBinding(),
-        TaskBinding(),
-      ],
+      name: AppRoutes.ADMIN_MEMBER_DETAIL,
+      page: () => const AdminMemberDetailScreen(),
+      binding: AdminMemberDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ADMIN_TASK_DETAIL,
+      page: () => AdminTaskDetailScreen(),
+      binding: AdminTaskDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ADMIN_SUMMARY_TASK_DETAIL,
+      page: () => AdminSumaryScreen(),
+      binding: AdminSummaryBinding(),
     ),
   ];
 }

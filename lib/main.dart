@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:task/app/initial_binding.dart';
 import 'package:task/firebase_options.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
@@ -19,12 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Task Manager',
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.INITIAL,
-      getPages: AppPages.pages,
-      builder: EasyLoading.init(),
+    return SafeArea(
+      child: GetMaterialApp(
+        title: 'Task Manager',
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.ADMIN_MAIN,
+        getPages: AppPages.pages,
+        initialBinding: InitialBinding(),
+        builder: EasyLoading.init(),
+      ),
     );
   }
 }
