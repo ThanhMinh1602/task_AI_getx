@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: 'Task Manager',
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.ADMIN_MAIN,
+        initialRoute: AppRoutes.SPLASH,
         getPages: AppPages.pages,
         initialBinding: InitialBinding(),
         builder: EasyLoading.init(),

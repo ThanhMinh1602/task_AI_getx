@@ -31,10 +31,6 @@ class AuthService {
     try {
       final userDoc = await _usersRef.doc(userId).get();
 
-      if (!userDoc.exists) {
-        return 'User not found';
-      }
-
       final userData = userDoc.data() as Map<String, dynamic>;
       if (userData['password'] != oldPassword) {
         return 'Incorrect password';

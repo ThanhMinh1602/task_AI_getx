@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:task/app/data/services/local/shared_pref_service.dart';
 import 'package:task/app/routes/app_routes.dart';
 
-class AdminMainController extends GetxController {
+class MemberMainController extends GetxController {
   var currentIndex = 0.obs;
 
   void changeTab(int index) {
