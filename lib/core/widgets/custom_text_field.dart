@@ -12,7 +12,8 @@ class CustomTextField extends StatefulWidget {
   final int? maxLines;
   final void Function()? onTap;
   final String? hintText;
-  final bool expands; // đã có expands ở đây
+  final bool expands;
+  final Color? fillColor;
 
   const CustomTextField({
     super.key,
@@ -26,7 +27,8 @@ class CustomTextField extends StatefulWidget {
     this.suffixIcon,
     this.hintText,
     this.suffix,
-    this.expands = false, // giá trị mặc định là false
+    this.expands = false, this.fillColor, 
+
   });
 
   @override
@@ -55,6 +57,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: AppColor.k613BE7,
       expands: widget.expands,
       decoration: InputDecoration(
+        filled: widget.fillColor != null,
+        fillColor: widget.fillColor,
         hintText: widget.hintText,
         contentPadding: const EdgeInsets.all(12.0),
         suffix: widget.suffix,

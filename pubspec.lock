@@ -307,6 +307,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animate_on_scroll:
+    dependency: "direct main"
+    description:
+      name: flutter_animate_on_scroll
+      sha256: bd173e8fdf3eab387819f37b4a63ff8e2af7573e035cef9f207413049add08d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   flutter_driver:
     dependency: transitive
     description: flutter

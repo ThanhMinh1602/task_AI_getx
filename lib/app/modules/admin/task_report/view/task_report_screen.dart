@@ -1,94 +1,129 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/task_report/controller/task_report_controller.dart';
+import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
-import 'package:task/core/widgets/custom_button.dart';
-import 'package:task/core/widgets/custom_dropdown_button.dart';
+import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_text_field.dart';
 
 class TaskReportScreen extends StatelessWidget {
   TaskReportScreen({super.key});
   final TaskReportController controller = Get.find();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Báo cáo Task')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Obx(() {
-              return controller.isLoading.value
-                  ? const CircularProgressIndicator()
-                  : Expanded(
-                      child: SingleChildScrollView(
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            controller.reportContent.value.isEmpty
-                                ? 'Response will appear here.'
-                                : controller.reportContent.value,
-                            style: const TextStyle(fontSize: 16),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('My Assistant'),
+          backgroundColor: AppColor.kDFE4F1,
+          actions: [
+            SizedBox(
+              width: 100,
+              child: Obx(
+                () => DropdownButtonFormField<GeminiType>(
+                  value: controller.typeGemini.value,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  items: const [
+                    DropdownMenuItem<GeminiType>(
+                        value: GeminiType.report,
+                        child: Text(
+                          'Gemini report',
+                          style: AppStyle.regular14,
+                        )),
+                    DropdownMenuItem<GeminiType>(
+                        value: GeminiType.chat,
+                        child: Text(
+                          'Gemini chat',
+                          style: AppStyle.regular14,
+                        )),
+                  ],
+                  onChanged: (p0) {
+                    controller.changeTypeGemini(p0!);
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+          ],
+        ),
+        body: Obx(() {
+          if (controller.messages.isNotEmpty) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _scrollController
+                  .jumpTo(_scrollController.position.maxScrollExtent);
+            });
+          }
+          return CustomBackground(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.only(bottom: 70),
+                  itemCount: controller.messages.length,
+                  itemBuilder: (context, index) {
+                    final message = controller.messages[index];
+                    return ListTile(
+                        title: Align(
+                      alignment: message.isSentByUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        margin: EdgeInsets.only(
+                            left: message.isSentByUser ? 51 : 0,
+                            right: message.isSentByUser ? 0 : 51),
+                        decoration: BoxDecoration(
+                          color: message.isSentByUser
+                              ? AppColor.k613BE7
+                              : AppColor.kFFFFFF,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          message.content,
+                          style: AppStyle.regular14.copyWith(
+                            color: message.isSentByUser
+                                ? AppColor.kFFFFFF
+                                : AppColor.k0D101C,
                           ),
                         ),
                       ),
-                    );
-            }),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: CustomTextField(
-                    prefixIcon: const Icon(Icons.emoji_emotions_outlined),
-                    controller: controller.promptController,
-                    hintText: 'Enter your prompt...',
-                  ),
+                    ));
+                  },
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  flex: 2,
-                  child: Obx(
-                    () => DropdownButtonFormField<GeminiType>(
-                      value: controller.typeGemini.value,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
+                Positioned(
+                  bottom: 10,
+                  left: 16,
+                  right: 16,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: CustomTextField(
+                          controller: controller.promptController,
+                          hintText: 'Type your message...',
+                          fillColor: AppColor.kFFFFFF,
+                        ),
                       ),
-                      items: [
-                        DropdownMenuItem<GeminiType>(
-                            value: GeminiType.report,
-                            child: Text(
-                              'Gemini report',
-                              style: AppStyle.regular14,
-                            )),
-                        DropdownMenuItem<GeminiType>(
-                            value: GeminiType.chat,
-                            child: Text(
-                              'Gemini chat',
-                              style: AppStyle.regular14,
-                            )),
-                      ],
-                      onChanged: (p0) {
-                        controller.changeTypeGemini(p0!);
-                      },
-                    ),
+                      const SizedBox(width: 10),
+                      IconButton(
+                          onPressed: () {
+                            controller.sendMessage();
+                          },
+                          icon: const Icon(Icons.send_rounded)),
+                    ],
                   ),
                 ),
               ],
             ),
-            CustomButton(
-              onPressed: () {
-                controller.generateGemini();
-              },
-              label: 'Send',
-            ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }

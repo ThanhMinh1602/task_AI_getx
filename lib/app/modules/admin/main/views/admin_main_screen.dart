@@ -12,8 +12,6 @@ import 'package:task/core/widgets/custom_appbar.dart';
 
 class AdminMainScreen extends StatelessWidget {
   AdminMainScreen({super.key});
-
-  // Khởi tạo controller
   final adminMainController = Get.find<AdminMainController>();
   final adminMemberController = Get.find<AdminMemberController>();
   final adminTaskController = Get.find<AdminTaskController>();
@@ -45,7 +43,7 @@ class AdminMainScreen extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Member'),
-            BottomNavigationBarItem(icon: Icon(Icons.report), label: 'Report'),
+            BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Gemini'),
           ],
         );
       }),
