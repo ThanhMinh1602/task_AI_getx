@@ -1,3 +1,4 @@
+import 'package:task/app/data/models/task_model.dart';
 import 'package:task/app/data/services/remote/base/base_service.dart';
 
 import '../../models/user_model.dart';
@@ -76,6 +77,33 @@ class UserService extends BaseService<UserModel> {
     } catch (e) {
       print('Error in UserService.getAll: $e');
       return [];
+    }
+  }
+
+  Future<UserModel?> fetchUserWithTasks(String userId) async {
+    try {
+      final userSnapshot = await collection.doc(userId).get();
+      if (!userSnapshot.exists) {
+        print('User not found!');
+        return null;
+      }
+
+      final user =
+          UserModel.fromJson(userSnapshot.data() as Map<String, dynamic>);
+
+      final taskSnapshot = await FirebaseProvider.tasksCollection
+          .where('assignTo', isEqualTo: userId)
+          .get();
+
+      final tasks = taskSnapshot.docs
+          .map((taskDoc) =>
+              TaskModel.fromJson(taskDoc.data() as Map<String, dynamic>))
+          .toList();
+
+      return user.copyWith(tasks: tasks);
+    } catch (e) {
+      print('Error fetching user with tasks: $e');
+      return null;
     }
   }
 }

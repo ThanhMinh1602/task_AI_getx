@@ -27,14 +27,12 @@ class MemberTaskController extends GetxController {
     initialData();
   }
 
-  // Hàm khởi tạo dữ liệu
   void initialData() {
     status.value = StatusModel.statuses;
     _getTasks();
     _getMember();
   }
 
-  // Hàm lấy danh sách nhiệm vụ của member
   Future<void> _getTasks() async {
     final userId = await SharedPrefService.getUserId();
     tasks.value = await _taskRepository.getTasksByUser(userId!);

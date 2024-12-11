@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:task/app/data/models/task_model.dart';
 import 'package:uuid/uuid.dart';
 import 'base/base_model.dart';
 
@@ -9,6 +10,7 @@ class UserModel extends BaseModel {
   final String? avatarUrl;
   final String? password;
   final String? role;
+  final List<TaskModel>? tasks;
 
   UserModel({
     String? id,
@@ -18,6 +20,7 @@ class UserModel extends BaseModel {
     this.password,
     this.avatarUrl,
     this.role = 'member',
+    this.tasks,
     Timestamp? createdAt,
     Timestamp? updatedAt,
   }) : super(
@@ -56,6 +59,11 @@ class UserModel extends BaseModel {
       updatedAt: json['updatedAt'] is Timestamp
           ? json['updatedAt'] as Timestamp
           : BaseModel.getCurrentTimestamp(),
+      tasks: json['tasks'] != null
+          ? (json['tasks'] as List)
+              .map((task) => TaskModel.fromJson(task))
+              .toList()
+          : [],
     );
   }
 
@@ -66,6 +74,7 @@ class UserModel extends BaseModel {
     String? avatarUrl,
     String? password,
     String? role,
+    List<TaskModel>? tasks,
   }) {
     return UserModel(
       id: id,
@@ -77,6 +86,7 @@ class UserModel extends BaseModel {
       role: role ?? this.role,
       createdAt: createdAt,
       updatedAt: BaseModel.getCurrentTimestamp(),
+      tasks: tasks ?? this.tasks,
     );
   }
 }
