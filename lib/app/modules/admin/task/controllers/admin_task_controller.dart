@@ -26,20 +26,19 @@ class AdminTaskController extends GetxController {
     initialData();
   }
 
-  // Hàm khởi tạo dữ liệu
   void initialData() {
     status.value = StatusModel.statuses;
     _getTasks();
     _getMembers();
   }
 
-  // Hàm lấy danh sách nhiệm vụ
   Future<void> _getTasks() async {
     tasks.value = await _taskRepository.getAll();
   }
 
   Future<void> _getMembers() async {
     members.value = await _userRepository.getAll();
+    print(members);
   }
 
   // Hàm điều hướng chung để tránh lặp lại mã

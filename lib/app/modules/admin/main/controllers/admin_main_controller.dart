@@ -11,6 +11,8 @@ class AdminMainController extends GetxController {
       Get.toNamed(AppRoutes.ADMIN_TASK);
     } else if (index == 1) {
       Get.toNamed(AppRoutes.ADMIN_MEMBER);
+    } else if (index == 2) {
+      Get.toNamed(AppRoutes.ADMIN_TASK_REPORT);
     }
   }
 

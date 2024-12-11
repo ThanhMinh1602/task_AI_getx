@@ -3,6 +3,7 @@ import 'package:task/app/data/repositories/auth_repository.dart';
 import 'package:task/app/data/repositories/task_repository.dart';
 import 'package:task/app/data/repositories/user_repository.dart';
 import 'package:task/app/data/services/remote/auth_service.dart';
+import 'package:task/app/data/services/remote/gemini_service.dart';
 import 'package:task/app/data/services/remote/task_service.dart';
 import 'package:task/app/data/services/remote/user_service.dart';
 import 'package:task/app/shared/controllers/auth_controller.dart';
@@ -16,6 +17,7 @@ class InitialBinding extends Bindings {
     Get.put<UserService>(UserService());
     Get.put<TaskService>(TaskService());
     Get.put<AuthService>(AuthService());
+    Get.put<GeminiService>(GeminiService());
 
     //Đăng ký repository
     Get.put<IUserRepository>(UserRepositoryImpl(userService: Get.find()));

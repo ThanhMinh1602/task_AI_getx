@@ -1,195 +1,122 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: '/home',
-    defaultTransition: Transition.fade,
-    getPages: [
-      GetPage(
-        name: '/home',
-        page: () => HomePage(),
-        binding: HomeBinding(),
-      ),
-      GetPage(
-        name: '/another',
-        page: () => AnotherPage(),
-      ),
-    ],
-  ));
+  runApp(MyApp());
 }
 
-class HomeBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => HomeController());
-  }
-}
-
-class HomeController extends GetxController {
-  static HomeController get to => Get.find();
-
-  var currentIndex = 0.obs;
-
-  final pages = <String>['/browse', '/history', '/settings'];
-
-  void changePage(int index) {
-    currentIndex.value = index;
-    Get.toNamed(pages[index], id: 1);
-  }
-
-  Route? onGenerateRoute(RouteSettings settings) {
-    if (settings.name == '/browse')
-      return GetPageRoute(
-        settings: settings,
-        page: () => BrowsePage(),
-        binding: BrowseBinding(),
-      );
-
-    if (settings.name == '/history')
-      return GetPageRoute(
-        settings: settings,
-        page: () => HistoryPage(),
-        binding: HistoryBinding(),
-      );
-
-    if (settings.name == '/settings')
-      return GetPageRoute(
-        settings: settings,
-        page: () => SettingsPage(),
-        binding: SettingsBinding(),
-      );
-
-    return null;
-  }
-}
-
-class HomePage extends GetView<HomeController> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Navigator(
-        key: Get.nestedKey(1),
-        initialRoute: '/browse',
-        onGenerateRoute: controller.onGenerateRoute,
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Browse',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-          currentIndex: controller.currentIndex.value,
-          selectedItemColor: Colors.pink,
-          onTap: controller.changePage,
-        ),
-      ),
+    return MaterialApp(
+      title: 'Generative AI Content Generator',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: GenerativeAIContentScreen(),
     );
   }
 }
 
-class BrowsePage extends StatelessWidget {
+class GenerativeAIContentScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    print(Get.currentRoute);
-    return Scaffold(
-      appBar: AppBar(title: Text('Browse')),
-      body: Center(
-        child: Container(
-          child: Text(Get.find<BrowseController>().title.value),
-        ),
-      ),
-    );
-  }
+  _GenerativeAIContentScreenState createState() =>
+      _GenerativeAIContentScreenState();
 }
 
-class HistoryPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    print(Get.currentRoute);
-    return Scaffold(
-      appBar: AppBar(title: Text('History')),
-      body: Center(
-        child: Container(
-          child: Text(Get.find<HistoryController>().title.value),
-        ),
-      ),
-    );
-  }
-}
+class _GenerativeAIContentScreenState extends State<GenerativeAIContentScreen> {
+  final TextEditingController _promptController = TextEditingController();
+  String _response = '';
+  bool _isLoading = false;
 
-class SettingsPage extends StatelessWidget {
+  final String _apiKey = 'YOUR_API_KEY_HERE'; // Replace with your API key
+  late GenerativeModel _model;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeModel();
+  }
+
+  void _initializeModel() {
+    _model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: _apiKey);
+  }
+
+  Future<void> _generateContent() async {
+    final prompt = _promptController.text.trim();
+    if (prompt.isEmpty) {
+      setState(() {
+        _response = 'Please enter a prompt!';
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _response = '';
+    });
+
+    try {
+      final content = [Content.text(prompt)];
+      final result = await _model.generateContent(content);
+      setState(() {
+        _response = result.text ?? 'No response received.';
+      });
+    } catch (e) {
+      setState(() {
+        _response = 'Error: $e';
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(Get.currentRoute);
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Generative AI Content'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Text(Get.find<SettingsController>().title.value),
+            TextField(
+              controller: _promptController,
+              decoration: const InputDecoration(
+                labelText: 'Enter your prompt',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 2,
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
-              child: Text('Another Page'),
-              onPressed: () => Get.toNamed('/another'),
+              onPressed: _isLoading ? null : _generateContent,
+              child: _isLoading
+                  ? CircularProgressIndicator(color: Colors.white)
+                  : Text('Generate Content'),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    _response.isEmpty
+                        ? 'Response will appear here.'
+                        : _response,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class BrowseController extends GetxController {
-  final title = 'Browser'.obs;
-}
-
-class HistoryController extends GetxController {
-  final title = 'History'.obs;
-}
-
-class SettingsController extends GetxController {
-  final title = 'Settings'.obs;
-}
-
-class BrowseBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => BrowseController());
-  }
-}
-
-class HistoryBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => HistoryController());
-  }
-}
-
-class SettingsBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => SettingsController());
-  }
-}
-
-class AnotherPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Another Page')), body: Container());
   }
 }

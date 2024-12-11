@@ -9,6 +9,8 @@ import 'package:task/app/modules/admin/summary/view/admin_sumary_task_detail_scr
 import 'package:task/app/modules/admin/task/binding/admin_task_binding.dart';
 import 'package:task/app/modules/admin/task_detail/binding/admin_task_detail_binding.dart';
 import 'package:task/app/modules/admin/task_detail/views/admin_task_detail_screen.dart';
+import 'package:task/app/modules/admin/task_report/binding/task_report_binding.dart';
+import 'package:task/app/modules/admin/task_report/view/task_report_screen.dart';
 import 'package:task/app/modules/login/binding/login_binding.dart';
 import 'package:task/app/modules/login/view/login_screen.dart';
 import 'package:task/app/modules/member/main/binding/member_main_binding.dart';
@@ -24,12 +26,10 @@ import 'package:task/app/modules/member/task_detail/binding/member_task_detail_b
 import 'package:task/app/modules/member/task_detail/views/member_task_detail_screen.dart';
 import 'package:task/app/modules/splash/binding/splash_binding.dart';
 import 'package:task/app/modules/splash/view/splash_screen.dart';
-// Import other views as needed
 import 'app_routes.dart';
 
 class AppPages {
   static const INITIAL = AppRoutes.SPLASH;
-
   static final pages = [
     //admin
     GetPage(
@@ -52,6 +52,7 @@ class AppPages {
         AdminMemberDetailBinding(),
         AdminTaskDetailBinding(),
         AdminMemberBinding(),
+        TaskReportBinding(),
       ],
     ),
     GetPage(
@@ -69,6 +70,7 @@ class AppPages {
       page: () => AdminSumaryScreen(),
       binding: AdminSummaryBinding(),
     ),
+
     //member
     GetPage(
       name: AppRoutes.MEMBER_MAIN,

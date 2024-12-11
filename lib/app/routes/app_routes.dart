@@ -8,6 +8,7 @@ class AppRoutes {
   static const ADMIN_MEMBER_DETAIL = '/admin-member-detail';
   static const ADMIN_TASK_DETAIL = '/admin-task-detail';
   static const ADMIN_SUMMARY_TASK_DETAIL = '/admin-summary-task-detail';
+  static const ADMIN_TASK_REPORT = '/admin-task-report';
 
   //member
   static const MEMBER_MAIN = '/member-main';

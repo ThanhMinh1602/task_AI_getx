@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/app/modules/admin/summary/view/admin_sumary_task_detail_screen.dart';
 import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
-import 'package:task/app/modules/admin/task_detail/views/admin_task_detail_screen.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/widgets/custom_background.dart';

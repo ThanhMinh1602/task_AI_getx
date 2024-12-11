@@ -30,6 +30,7 @@ environment:
 dependencies:
   cloud_firestore: ^5.5.1
   cupertino_icons: ^1.0.8
+  extension_google_sign_in_as_googleapis_auth: ^2.0.12
   firebase_core: ^3.8.1
   flutter:
     sdk: flutter
@@ -37,9 +38,15 @@ dependencies:
   flutter_svg: ^2.0.16
   get: ^4.6.6
   google_fonts: ^6.2.1
+  google_generative_ai: ^0.4.6
+  google_sign_in: ^6.2.2
+  googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
+  http: ^1.2.2
   intl: ^0.20.1
   page_transition: ^2.1.0
   shared_preferences: ^2.3.3
+  url_launcher: ^6.3.1
   uuid: ^4.5.1
 
 dev_dependencies:

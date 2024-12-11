@@ -8,9 +8,12 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final Widget? suffix;
   final int? maxLines;
   final void Function()? onTap;
   final String? hintText;
+  final bool expands; // đã có expands ở đây
+
   const CustomTextField({
     super.key,
     required this.controller,
@@ -22,6 +25,8 @@ class CustomTextField extends StatefulWidget {
     this.onTap,
     this.suffixIcon,
     this.hintText,
+    this.suffix,
+    this.expands = false, // giá trị mặc định là false
   });
 
   @override
@@ -42,15 +47,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPassword ? obscureText : false,
-      maxLines: widget.isPassword ? 1 : widget.maxLines,
+      maxLines: widget.isPassword ? 1 : null,
       validator: widget.validator,
       readOnly: widget.readOnly,
       onTap: widget.onTap,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       cursorColor: AppColor.k613BE7,
+      expands: widget.expands,
       decoration: InputDecoration(
         hintText: widget.hintText,
         contentPadding: const EdgeInsets.all(12.0),
+        suffix: widget.suffix,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
