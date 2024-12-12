@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:task/app/modules/admin/task_detail/controllers/admin_task_detail_controller.dart';
 import 'package:task/app/modules/member/task_detail/controllers/member_task_detail_controller.dart';
 import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
@@ -11,9 +9,7 @@ import 'package:task/core/widgets/custom_appbar.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_button.dart';
 import 'package:task/core/widgets/custom_card.dart';
-import 'package:task/core/widgets/custom_dialog.dart';
 import 'package:task/core/widgets/custom_dropdown_button.dart';
-import 'package:task/core/widgets/custom_text_field.dart';
 
 class MemberTaskDetailScreen extends StatelessWidget {
   MemberTaskDetailScreen({super.key});

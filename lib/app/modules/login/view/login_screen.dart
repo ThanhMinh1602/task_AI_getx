@@ -25,15 +25,17 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _buildHeader(),
+                  Hero(tag: Get.arguments, child: const CustomLogo(width: 50)),
                   const SizedBox(height: 70),
                   _buildTextField(
+                    key: const Key('emailField'),
                     controller: loginController.emailController,
                     hintText: 'Email',
                     prefixIcon: const Icon(Icons.email),
                   ),
                   const SizedBox(height: 16),
                   _buildTextField(
+                    key: const Key('passwordField'),
                     controller: loginController.passwordController,
                     hintText: 'Password',
                     isPassword: true,
@@ -41,6 +43,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 70),
                   CustomButton(
+                    key: const Key('loginButton'),
                     label: 'Login',
                     onPressed: loginController.login,
                   ),
@@ -53,23 +56,14 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Row _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('L'.toUpperCase(), style: AppStyle.medium26),
-        const CustomLogo(size: 24),
-        const Text('GIN', style: AppStyle.medium26),
-      ],
-    );
-  }
-
   Widget _buildTextField(
       {required TextEditingController controller,
       required String hintText,
       required Widget prefixIcon,
+      Key? key,
       bool isPassword = false}) {
     return CustomTextField(
+      key: key,
       controller: controller,
       hintText: hintText,
       prefixIcon: prefixIcon,

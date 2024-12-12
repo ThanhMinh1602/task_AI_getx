@@ -16,9 +16,9 @@ class UserRepositoryImpl extends BaseRepository<UserModel>
       : _userService = userService;
 
   @override
-  Future<UserModel?> create(UserModel user) async {
+  Future<UserModel?> create(UserModel model) async {
     try {
-      return await _userService.create(user);
+      return await _userService.create(model);
     } catch (e) {
       print('Error in UserRepository.create: $e');
       return null;
@@ -57,9 +57,9 @@ class UserRepositoryImpl extends BaseRepository<UserModel>
   }
 
   @override
-  Future<UserModel?> update(UserModel user) async {
+  Future<UserModel?> update(UserModel model) async {
     try {
-      return await _userService.update(user);
+      return await _userService.update(model);
     } catch (e) {
       print('Error in UserRepository.update: $e');
       return null;

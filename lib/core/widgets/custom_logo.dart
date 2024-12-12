@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:task/core/constants/app_color.dart';
+import 'package:lottie/lottie.dart';
+import 'package:task/gen/assets.gen.dart';
 
 class CustomLogo extends StatelessWidget {
-  const CustomLogo({super.key, this.size, this.color});
-  final double? size;
-  final Color? color;
+  const CustomLogo({super.key, this.width});
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.task_alt,
-        size: size ?? 80, color: color ?? AppColor.k613BE7);
+    return Transform.scale(
+      scale: 7,
+      child: Lottie.asset(Assets.jsons.splashLotie,
+          fit: BoxFit.fill, reverse: true, repeat: false, width: width ?? 350),
+    );
   }
 }

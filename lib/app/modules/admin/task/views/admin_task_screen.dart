@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
 import 'package:task/core/constants/app_color.dart';
@@ -93,6 +94,7 @@ class AdminTaskScreen extends StatelessWidget {
               Expanded(
                 child: Obx(
                   () => ListView.separated(
+                    controller: context.scrollController,
                     padding: const EdgeInsets.all(20.0),
                     itemCount: controller.tasks.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 10.0),

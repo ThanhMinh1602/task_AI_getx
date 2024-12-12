@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:task/core/utils/string_format.dart';
 import 'package:uuid/uuid.dart';
 import 'base/base_model.dart';
 
@@ -35,6 +36,19 @@ class TaskModel extends BaseModel {
       'assignTo': assignTo,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+    };
+  }
+
+  Map<String, dynamic> toGeminiFormat(String name) {
+    return {
+      'task_id': id,
+      'task_title': title,
+      'task_description': description,
+      'task_due_date': dueDate,
+      'task_status': status,
+      'task_assigned_to': name,
+      'created_at': StringFormat.formatDate(createdAt.toDate()),
+      'updated_at': StringFormat.formatDate(updatedAt.toDate()),
     };
   }
 

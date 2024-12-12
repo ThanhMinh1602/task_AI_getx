@@ -40,16 +40,18 @@ class TaskService extends BaseService<TaskModel> {
   }
 
   @override
-  Future<TaskModel?> create(TaskModel task) async {
+  Future<TaskModel?> create(TaskModel model) async {
     try {
-      final existingTask =
-          await collection.where('title', isEqualTo: task.title).limit(1).get();
+      final existingTask = await collection
+          .where('title', isEqualTo: model.title)
+          .limit(1)
+          .get();
 
       if (existingTask.docs.isNotEmpty) {
         print('Task with this title already exists');
         return null;
       }
-      return super.create(task);
+      return super.create(model);
     } catch (e) {
       print('Error in TaskService.create: $e');
       return null;
@@ -74,11 +76,5 @@ class TaskService extends BaseService<TaskModel> {
   @override
   Future<List<TaskModel>> getAll() async {
     return await super.getAll();
-  }
-
-  @override
-  Future<TaskModel?> getById(String id) {
-    // TODO: implement getById
-    throw UnimplementedError();
   }
 }

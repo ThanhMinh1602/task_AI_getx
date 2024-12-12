@@ -10,7 +10,6 @@ import 'package:task/app/modules/admin/task/binding/admin_task_binding.dart';
 import 'package:task/app/modules/admin/task_detail/binding/admin_task_detail_binding.dart';
 import 'package:task/app/modules/admin/task_detail/views/admin_task_detail_screen.dart';
 import 'package:task/app/modules/admin/task_report/binding/task_report_binding.dart';
-import 'package:task/app/modules/admin/task_report/view/task_report_screen.dart';
 import 'package:task/app/modules/login/binding/login_binding.dart';
 import 'package:task/app/modules/login/view/login_screen.dart';
 import 'package:task/app/modules/member/main/binding/member_main_binding.dart';
@@ -34,17 +33,20 @@ class AppPages {
     //admin
     GetPage(
       name: AppRoutes.SPLASH,
-      page: () => const SplashScreen(),
+      page: () => SplashScreen(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => LoginScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 2000),
       binding: LoginBinding(),
     ),
     GetPage(
       name: AppRoutes.ADMIN_MAIN,
       page: () => AdminMainScreen(),
+      
       bindings: [
         AdminMainBinding(),
         AdminTaskBinding(),
@@ -54,21 +56,25 @@ class AppPages {
         AdminMemberBinding(),
         TaskReportBinding(),
       ],
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.ADMIN_MEMBER_DETAIL,
       page: () => AdminMemberDetailScreen(),
       binding: AdminMemberDetailBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.ADMIN_TASK_DETAIL,
       page: () => AdminTaskDetailScreen(),
       binding: AdminTaskDetailBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.ADMIN_SUMMARY_TASK_DETAIL,
       page: () => AdminSumaryScreen(),
       binding: AdminSummaryBinding(),
+      transition: Transition.rightToLeft,
     ),
 
     //member
@@ -80,11 +86,13 @@ class AppPages {
         MemberProfileBinding(),
         MemberTaskBinding(),
       ],
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.MEMBER_TASK,
       page: () => MemberTaskScreen(),
       binding: MemberTaskBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.MEMBER_TASK_DETAIL,
@@ -95,16 +103,19 @@ class AppPages {
       name: AppRoutes.MEMBER_SUMMARY_TASK_DETAIL,
       page: () => MemberSumaryTaskDetailScreen(),
       binding: MemberSummaryBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.MEMBER_PROFILE,
       page: () => MemberProfileScreen(),
       binding: MemberProfileBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.MEMBER_CHANGE_PASSWORD,
       page: () => MemberChangePasswordScreen(),
       binding: MemberProfileBinding(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }

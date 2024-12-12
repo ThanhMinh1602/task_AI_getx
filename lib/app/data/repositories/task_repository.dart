@@ -16,9 +16,9 @@ class TaskRepositoryImpl extends BaseRepository<TaskModel>
       : _taskService = taskService;
 
   @override
-  Future<TaskModel?> create(TaskModel task) async {
+  Future<TaskModel?> create(TaskModel model) async {
     try {
-      return await _taskService.create(task);
+      return await _taskService.create(model);
     } catch (e) {
       print('Error in TaskRepository.create: $e');
       return null;
@@ -57,9 +57,9 @@ class TaskRepositoryImpl extends BaseRepository<TaskModel>
   }
 
   @override
-  Future<TaskModel?> update(TaskModel task) async {
+  Future<TaskModel?> update(TaskModel model) async {
     try {
-      return await _taskService.update(task);
+      return await _taskService.update(model);
     } catch (e) {
       print('Error in TaskRepository.update: $e');
       return null;

@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/data/models/mesage_model.dart';
-import 'package:task/app/data/models/task_model.dart';
 import 'package:task/app/data/models/user_model.dart';
 import 'package:task/app/data/repositories/task_repository.dart';
 import 'package:task/app/data/repositories/user_repository.dart';
@@ -18,7 +18,6 @@ class TaskReportController extends GetxController {
   var reportContent = ''.obs;
   var isLoading = false.obs;
   RxList<MessageModel> messages = <MessageModel>[].obs;
-
   String conversationContext = '';
 
   TaskReportController({
@@ -53,9 +52,24 @@ class TaskReportController extends GetxController {
   Future<void> generateGeminiReport(String context) async {
     try {
       isLoading.value = true;
+
       final tasks = await _taskRepository.getAll();
-      final dataJson = tasks.map((task) => task.toJson()).join(',');
-      final report = await _geminiService.generateContent('$context $dataJson');
+      final users = await _userRepository.getAll();
+
+      final dataJson = jsonEncode(
+        tasks.map((task) {
+          final assignedUser = users.firstWhere(
+              (user) => user.id == task.assignTo,
+              orElse: () => UserModel(id: '', name: ''));
+          final userName = assignedUser.name ?? 'Unknown';
+          return task.toGeminiFormat(userName);
+        }).toList(),
+      );
+
+      print('Number of tasks: ${tasks.length}');
+      print('Generated data JSON: $dataJson');
+      final report = await _geminiService.generateContent(context, dataJson);
+
       messages.removeWhere((msg) => msg.content == 'Đang trả lời...');
       messages.add(MessageModel(content: report, isSentByUser: false));
 
@@ -71,7 +85,7 @@ class TaskReportController extends GetxController {
   Future<void> generateGeminiChat(String context) async {
     try {
       isLoading.value = true;
-      final response = await _geminiService.generateContent(context);
+      final response = await _geminiService.generateContent(context, '');
 
       messages.removeWhere((msg) => msg.content == 'Đang trả lời...');
       messages.add(MessageModel(content: response, isSentByUser: false));

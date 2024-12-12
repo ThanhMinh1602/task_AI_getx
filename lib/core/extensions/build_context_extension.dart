@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 extension BuildContextExtension on BuildContext {
   double get getWidth => MediaQuery.of(this).size.width;

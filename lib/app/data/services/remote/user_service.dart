@@ -28,15 +28,15 @@ class UserService extends BaseService<UserModel> {
   }
 
   @override
-  Future<UserModel?> create(UserModel userModel) async {
+  Future<UserModel?> create(UserModel model) async {
     try {
-      final existingUser = await getUserByEmail(userModel.email!);
+      final existingUser = await getUserByEmail(model.email!);
       if (existingUser != null) {
         print('User with this email already exists');
         return null;
       }
 
-      return super.create(userModel);
+      return super.create(model);
     } catch (e) {
       print('Error in UserService.create: $e');
       return null;

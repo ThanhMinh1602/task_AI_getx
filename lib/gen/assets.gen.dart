@@ -23,10 +23,24 @@ class $AssetsImagesGen {
   List<dynamic> get values => [avatarNull, logo];
 }
 
+class $AssetsJsonsGen {
+  const $AssetsJsonsGen();
+
+  /// File path: assets/jsons/splash_lotie.json
+  String get splashLotie => 'assets/jsons/splash_lotie.json';
+
+  /// File path: assets/jsons/success.json
+  String get success => 'assets/jsons/success.json';
+
+  /// List of all assets
+  List<String> get values => [splashLotie, success];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }
 
 class AssetGenImage {

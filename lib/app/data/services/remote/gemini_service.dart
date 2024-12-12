@@ -9,12 +9,12 @@ class GeminiService {
   }
 
   void _initializeModel() {
-    _model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+    _model = GenerativeModel(model: 'gemini-1.5-pro', apiKey: apiKey);
   }
 
-  Future<String> generateContent(String prompt) async {
+  Future<String> generateContent(String prompt, String data) async {
     try {
-      final content = [Content.text(prompt)];
+      final content = [Content.text(prompt),Content.text(data)];
       final result = await _model.generateContent(content);
       return result.text ?? 'No response received.';
     } catch (e) {

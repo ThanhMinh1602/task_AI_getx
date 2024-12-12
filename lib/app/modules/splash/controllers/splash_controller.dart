@@ -3,6 +3,7 @@ import 'package:task/app/data/services/local/shared_pref_service.dart';
 import 'package:task/app/routes/app_routes.dart';
 
 class SplashController extends GetxController {
+  final String logoTag = 'logo';
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -19,7 +20,7 @@ class SplashController extends GetxController {
       if (userId != null) {
         _navigateToRoleBasedScreen(userRole);
       } else {
-        Get.offAllNamed(AppRoutes.LOGIN);
+        Get.offAllNamed(AppRoutes.LOGIN, arguments: logoTag);
       }
     } catch (e) {
       print('Error in SplashController: $e');
