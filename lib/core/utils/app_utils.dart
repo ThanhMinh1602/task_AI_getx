@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AppUtils {
@@ -14,5 +16,15 @@ class AppUtils {
       default:
         return Colors.grey;
     }
+  }
+
+  static String generateRandomString(int length) {
+    const characters =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+
+    return List.generate(
+            length, (index) => characters[random.nextInt(characters.length)])
+        .join();
   }
 }

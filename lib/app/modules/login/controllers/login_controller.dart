@@ -37,7 +37,7 @@ class LoginController extends GetxController {
               EasyLoading.showError('Unknown role');
           }
         } else {
-          EasyLoading.showError('Invalid email or password');
+          EasyLoading.showError('Email or password is incorrect');
         }
       } catch (e) {
         EasyLoading.showError('An error occurred: $e');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/member/controllers/admin_member_controller.dart';
+import 'package:task/core/constants/test_key.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_floating_action_button.dart';
 import 'package:task/core/widgets/custom_member_card.dart';
@@ -12,6 +13,8 @@ class AdminMemberScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: CustomFloatingActionButton(
+        key: const Key(TestKey.addMemberButton),
+        tag: 'addMember',
         icon: Icons.person_add_outlined,
         onPressed: () => controller.goToCreateMember(),
       ),

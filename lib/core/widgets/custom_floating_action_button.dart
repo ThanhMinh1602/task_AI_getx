@@ -6,13 +6,15 @@ class CustomFloatingActionButton extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.icon,
+    required this.tag,
   });
   final void Function()? onPressed;
   final IconData icon;
+  final String tag;
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      
+      heroTag: tag,
       onPressed: onPressed,
       backgroundColor: AppColor.k613BE7,
       foregroundColor: AppColor.kFFFFFF,

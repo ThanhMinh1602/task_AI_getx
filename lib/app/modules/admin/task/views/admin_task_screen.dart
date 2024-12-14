@@ -16,6 +16,8 @@ class AdminTaskScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: CustomFloatingActionButton(
+        tag: 'addTask',
+        key: const Key('addTask'),
         icon: Icons.add_task,
         onPressed: () => controller.goToTaskDetail(null),
       ),

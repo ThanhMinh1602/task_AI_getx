@@ -47,7 +47,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: widget.key,
       controller: widget.controller,
       obscureText: widget.isPassword ? obscureText : false,
       maxLines: widget.isPassword ? 1 : null,

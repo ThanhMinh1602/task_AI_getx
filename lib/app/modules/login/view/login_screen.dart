@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/login/controllers/login_controller.dart';
 import 'package:task/core/constants/app_color.dart';
-import 'package:task/core/constants/app_style.dart';
+import 'package:task/core/constants/test_key.dart';
 import 'package:task/core/utils/validator.dart';
 import 'package:task/core/widgets/custom_button.dart';
 import 'package:task/core/widgets/custom_logo.dart';
@@ -28,14 +28,14 @@ class LoginScreen extends StatelessWidget {
                   Hero(tag: Get.arguments, child: const CustomLogo(width: 50)),
                   const SizedBox(height: 70),
                   _buildTextField(
-                    key: const Key('emailField'),
+                    key: const Key(TestKey.emailField),
                     controller: loginController.emailController,
                     hintText: 'Email',
                     prefixIcon: const Icon(Icons.email),
                   ),
                   const SizedBox(height: 16),
                   _buildTextField(
-                    key: const Key('passwordField'),
+                    key: const Key(TestKey.passwordField),
                     controller: loginController.passwordController,
                     hintText: 'Password',
                     isPassword: true,
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 70),
                   CustomButton(
-                    key: const Key('loginButton'),
+                    key: const Key(TestKey.loginButton),
                     label: 'Login',
                     onPressed: loginController.login,
                   ),

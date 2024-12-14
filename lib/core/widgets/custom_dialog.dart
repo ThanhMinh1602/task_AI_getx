@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task/core/constants/test_key.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title;
@@ -44,6 +45,7 @@ class CustomDialog extends StatelessWidget {
           ),
         ),
         TextButton(
+          key: const Key(TestKey.confirmDeleteButton),
           onPressed: () {
             Get.back();
             onConfirm();

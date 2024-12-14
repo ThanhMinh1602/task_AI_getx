@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/member_detail/controllers/admin_member_detail_controller.dart';
 import 'package:task/core/constants/app_style.dart';
+import 'package:task/core/constants/test_key.dart';
 import 'package:task/core/extensions/build_context_extension.dart';
 import 'package:task/core/utils/validator.dart';
 import 'package:task/core/widgets/custom_appbar.dart';
@@ -37,18 +38,28 @@ class AdminMemberDetailScreen extends StatelessWidget {
                     key: controller.formKey,
                     child: Column(
                       children: [
-                        _buildTextField('Name', controller.nameController,
+                        _buildTextField(
+                            key: const Key(TestKey.memberNameField),
+                            'Name',
+                            controller.nameController,
                             validator: (value) =>
                                 Validator.validateEmpty(value!)),
                         _buildTextField(
-                            'Phone number', controller.phoneController,
+                            key: const Key(TestKey.memberPhoneField),
+                            'Phone number',
+                            controller.phoneController,
                             validator: (value) =>
                                 Validator.validateEmpty(value!)),
-                        _buildTextField('Email', controller.emailController,
+                        _buildTextField(
+                            key: const Key(TestKey.memberEmailField),
+                            'Email',
+                            controller.emailController,
                             validator: (value) =>
                                 Validator.validateEmail(value!)),
                         _buildTextField(
-                            'Password', controller.passwordController,
+                            key: const Key(TestKey.memberPasswordField),
+                            'Password',
+                            controller.passwordController,
                             isPassword: true,
                             validator: (value) =>
                                 Validator.validatePassword(value!)),
@@ -81,6 +92,7 @@ class AdminMemberDetailScreen extends StatelessWidget {
                               const SizedBox(width: 10.0),
                               Expanded(
                                 child: CustomButton(
+                                    key: const Key('updateButton'),
                                     label: 'Update',
                                     onPressed: () {
                                       controller.updateMember();
@@ -90,6 +102,7 @@ class AdminMemberDetailScreen extends StatelessWidget {
                           )
                         else
                           CustomButton(
+                              key: const Key(TestKey.createMemberButton),
                               label: 'Add new member',
                               onPressed: () => controller.createMember()),
                       ],
@@ -105,13 +118,16 @@ class AdminMemberDetailScreen extends StatelessWidget {
   }
 
   Widget _buildTextField(String label, TextEditingController controller,
-      {bool isPassword = false, String? Function(String?)? validator}) {
+      {bool isPassword = false,
+      String? Function(String?)? validator,
+      required Key key}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: AppStyle.medium14),
         const SizedBox(height: 10),
         CustomTextField(
+          key: key,
           controller: controller,
           isPassword: isPassword,
           validator: validator,
