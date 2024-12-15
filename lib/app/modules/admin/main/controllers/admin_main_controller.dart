@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:task/app/data/services/local/shared_pref_service.dart';
+import 'package:task/app/modules/admin/member/controllers/admin_member_controller.dart';
+import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
+import 'package:task/app/modules/admin/task_report/controller/task_report_controller.dart';
 import 'package:task/app/routes/app_routes.dart';
 
 class AdminMainController extends GetxController {
@@ -18,6 +21,6 @@ class AdminMainController extends GetxController {
 
   void logOut() async {
     await SharedPrefService.clearAll();
-    Get.offAllNamed(AppRoutes.LOGIN);
+    Get.offAndToNamed(AppRoutes.LOGIN);
   }
 }

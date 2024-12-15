@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/admin/summary/controllers/admin_summary_controller.dart';
+import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
 import 'package:task/core/widgets/custom_appbar.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_task_card.dart';
@@ -20,6 +21,8 @@ class AdminSumaryScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             final data = summaryController.taskByStatus[index];
             return CustomTaskCard(
+              assignTo: Get.find<AdminTaskController>()
+                  .getNameMemberByTask(data.assignTo!),
               onTap: () => summaryController.goToTaskDetail(data),
               taskModel: data,
             );

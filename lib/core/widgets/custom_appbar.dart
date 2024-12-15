@@ -8,9 +8,11 @@ import 'package:task/core/utils/string_format.dart';
 import 'package:task/core/widgets/custom_dialog.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, this.isMain = false, this.title});
+  const CustomAppbar(
+      {super.key, this.isMain = false, this.title, this.onLogout});
   final bool isMain;
   final String? title;
+  final Function()? onLogout;
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +23,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Hello snapshot.data?.name}!',
-                      style: AppStyle.regular12),
-                  Text(StringFormat.formatDate(DateTime.now()),
-                      style: AppStyle.medium16)
-                ],
-              ),
-            ),
+                child: Text(StringFormat.formatDate(DateTime.now()),
+                    style: AppStyle.medium16)),
             GestureDetector(
                 onTap: () => showDialog(
                       context: context,
@@ -38,10 +32,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                         return CustomDialog(
                             title: 'Logout',
                             content: 'Bạn có chắc chắn mốn đăng xuất',
-                            onConfirm: () {
-                              Get.find<AdminMainController>().logOut();
-                              Get.find<MemberMainController>().logOut();
-                            });
+                            onConfirm: onLogout ?? () {});
                       },
                     ),
                 child:

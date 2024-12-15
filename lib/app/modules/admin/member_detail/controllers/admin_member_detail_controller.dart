@@ -1,9 +1,11 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:task/app/data/models/user_model.dart';
 import 'package:task/app/data/repositories/user_repository.dart';
 import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
+import 'package:task/gen/assets.gen.dart';
 
 class AdminMemberDetailController extends GetxController {
   final IUserRepository _userRepository;
@@ -34,6 +36,16 @@ class AdminMemberDetailController extends GetxController {
   }
 
   Future<void> createMember() async {
+    List<String> avts = [
+      Assets.images.avt1.path,
+      Assets.images.avt2.path,
+      Assets.images.avt3.path,
+      Assets.images.avt4.path,
+      Assets.images.avt5.path,
+    ];
+    final random = Random();
+    final randomIndex = random.nextInt(avts.length);
+    final randomAvt = avts[randomIndex];
     if (formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Creating member...');
       final user = UserModel(
@@ -41,6 +53,7 @@ class AdminMemberDetailController extends GetxController {
         email: emailController.text,
         phoneNumber: phoneController.text,
         password: passwordController.text,
+        avatarUrl: randomAvt,
       );
       final result = await _userRepository.create(user);
       if (result != null) {

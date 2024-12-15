@@ -16,12 +16,20 @@ class CustomMemberCard extends StatelessWidget {
       child: CustomCard(
           child: Row(
         children: [
-          CircleAvatar(
-            radius: 30.0,
-            backgroundColor: AppColor.kFFFFFF,
-            backgroundImage: userModel.avatarUrl != null
-                ? NetworkImage(userModel.avatarUrl!)
-                : AssetImage(Assets.images.avatarNull.path),
+          Container(
+            width: 50.0,
+            height: 50.0,
+            decoration: BoxDecoration(
+              color: AppColor.kFFFFFF,
+              borderRadius: BorderRadius.circular(100.0),
+              border: Border.all(color: AppColor.k6E7591),
+              image: DecorationImage(
+                fit: BoxFit.scaleDown,
+                image: AssetImage(
+                  userModel.avatarUrl ?? Assets.images.avatarNull.path,
+                ),
+              ),
+            ),
           ),
           const SizedBox(width: 12.0),
           Expanded(

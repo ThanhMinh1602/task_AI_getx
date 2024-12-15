@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task/app/data/models/task_model.dart';
+import 'package:task/app/modules/admin/task/controllers/admin_task_controller.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/utils/app_utils.dart';
 import 'package:task/core/widgets/custom_card.dart';
@@ -38,10 +41,10 @@ class CustomTaskCard extends StatelessWidget {
                           icon: Icons.calendar_month_outlined,
                           title: taskModel.dueDate ?? '--:--'),
                       const SizedBox(height: 5.0),
-                      if (taskModel.assignTo != null)
+                      if (assignTo != null)
                         _buildIconText(
                             icon: Icons.person_outline_outlined,
-                            title: assignTo ?? '--:--')
+                            title: assignTo!)
                     ],
                   ),
                 ),

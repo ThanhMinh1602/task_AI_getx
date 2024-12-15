@@ -25,7 +25,10 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Hero(tag: Get.arguments, child: const CustomLogo(width: 50)),
+                  if (Get.arguments != null)
+                    Hero(tag: Get.arguments, child: const CustomLogo(width: 50))
+                  else
+                    const CustomLogo(width: 50),
                   const SizedBox(height: 70),
                   _buildTextField(
                     key: const Key(TestKey.emailField),

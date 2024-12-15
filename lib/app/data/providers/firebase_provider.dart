@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseProvider {
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  static CollectionReference get usersCollection =>
-      _firestore.collection('users');
+  static CollectionReference usersCollection = _firestore.collection('users');
 
   static CollectionReference get tasksCollection =>
       _firestore.collection('tasks');

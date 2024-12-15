@@ -19,7 +19,10 @@ class MemberMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(isMain: true),
+      appBar: CustomAppbar(
+        isMain: true,
+        onLogout: () => memberMainController.logOut(),
+      ),
       body: Obx(() {
         return IndexedStack(
           index: memberMainController.currentIndex.value,

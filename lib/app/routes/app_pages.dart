@@ -46,7 +46,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.ADMIN_MAIN,
       page: () => AdminMainScreen(),
-      
       bindings: [
         AdminMainBinding(),
         AdminTaskBinding(),

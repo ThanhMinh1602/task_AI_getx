@@ -46,12 +46,4 @@ class LoginController extends GetxController {
       }
     }
   }
-
-  // Dọn dẹp TextEditingController khi không dùng nữa
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
-  }
 }

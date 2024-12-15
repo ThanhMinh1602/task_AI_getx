@@ -20,7 +20,10 @@ class AdminMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(isMain: true),
+      appBar: CustomAppbar(
+        isMain: true,
+        onLogout: () => adminMainController.logOut(),
+      ),
       body: Obx(() {
         return IndexedStack(
           index: adminMainController.currentIndex.value,

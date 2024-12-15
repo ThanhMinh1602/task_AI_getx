@@ -102,13 +102,20 @@ class MemberProfileScreen extends StatelessWidget {
   }
 
   Widget _buildAvatar() {
-    return CircleAvatar(
-      radius: 50.0,
-      backgroundColor: AppColor.kFFFFFF,
-      backgroundImage: memberController.member.value.avatarUrl == null
-          ? AssetImage(Assets.images.avatarNull.path)
-          : NetworkImage(memberController.member.value.avatarUrl!)
-              as ImageProvider,
+    return Container(
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        color: AppColor.kFFFFFF,
+        border: Border.all(color: AppColor.k6E7591),
+        borderRadius: BorderRadius.circular(50),
+        image: DecorationImage(
+          image: memberController.member.value.avatarUrl == null
+              ? AssetImage(Assets.images.avatarNull.path)
+              : AssetImage(memberController.member.value.avatarUrl!)
+                  as ImageProvider,
+        ),
+      ),
     );
   }
 }

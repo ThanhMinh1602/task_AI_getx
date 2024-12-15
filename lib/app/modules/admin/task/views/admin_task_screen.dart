@@ -103,6 +103,8 @@ class AdminTaskScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final data = controller.tasks[index];
                       return CustomTaskCard(
+                        assignTo: Get.find<AdminTaskController>()
+                            .getNameMemberByTask(data.assignTo!),
                         onTap: () => controller.goToTaskDetail(data),
                         taskModel: data,
                       );

@@ -16,11 +16,26 @@ class $AssetsImagesGen {
   AssetGenImage get avatarNull =>
       const AssetGenImage('assets/images/avatar_null.png');
 
+  /// File path: assets/images/avt1.png
+  AssetGenImage get avt1 => const AssetGenImage('assets/images/avt1.png');
+
+  /// File path: assets/images/avt2.png
+  AssetGenImage get avt2 => const AssetGenImage('assets/images/avt2.png');
+
+  /// File path: assets/images/avt3.png
+  AssetGenImage get avt3 => const AssetGenImage('assets/images/avt3.png');
+
+  /// File path: assets/images/avt4.png
+  AssetGenImage get avt4 => const AssetGenImage('assets/images/avt4.png');
+
+  /// File path: assets/images/avt5.png
+  AssetGenImage get avt5 => const AssetGenImage('assets/images/avt5.png');
+
   /// File path: assets/images/logo.svg
   String get logo => 'assets/images/logo.svg';
 
   /// List of all assets
-  List<dynamic> get values => [avatarNull, logo];
+  List<dynamic> get values => [avatarNull, avt1, avt2, avt3, avt4, avt5, logo];
 }
 
 class $AssetsJsonsGen {

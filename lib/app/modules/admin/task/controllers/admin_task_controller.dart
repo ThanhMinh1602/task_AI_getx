@@ -41,15 +41,13 @@ class AdminTaskController extends GetxController {
     print(members);
   }
 
-  // Hàm điều hướng chung để tránh lặp lại mã
   Future<void> _goToPage(String route, {dynamic arguments}) async {
     final result = await Get.toNamed(route, arguments: arguments);
     if (result == true) {
-      onInit(); // Refresh data if necessary
+      onInit();
     }
   }
 
-  // Điều hướng đến màn hình thống kê
   Future<void> goToSummary(String status) async {
     await _goToPage(AppRoutes.ADMIN_SUMMARY_TASK_DETAIL, arguments: status);
   }

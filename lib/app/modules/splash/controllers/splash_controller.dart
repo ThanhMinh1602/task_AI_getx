@@ -5,7 +5,7 @@ import 'package:task/app/routes/app_routes.dart';
 class SplashController extends GetxController {
   final String logoTag = 'logo';
   @override
-  Future<void> onInit() async {
+  void onInit() async {
     super.onInit();
     await _navigateBasedOnAuthStatus();
   }
