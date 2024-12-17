@@ -31,7 +31,7 @@ class MemberTaskDetailScreen extends StatelessWidget {
         child: GestureDetector(
           onTap: () => context.unFocus,
           child: Form(
-            key: controller.formKey,
+            key: controller.memberTaskDetailFormKey,
             child: SingleChildScrollView(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),

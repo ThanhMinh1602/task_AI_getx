@@ -12,7 +12,6 @@ import 'package:task/core/widgets/custom_card.dart';
 import 'package:task/core/widgets/custom_dialog.dart';
 import 'package:task/core/widgets/custom_dropdown_button.dart';
 import 'package:task/core/widgets/custom_text_field.dart';
-import 'package:task/core/constants/test_key.dart';
 
 class AdminTaskDetailScreen extends StatelessWidget {
   AdminTaskDetailScreen({super.key});
@@ -34,7 +33,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
         child: GestureDetector(
           onTap: () => context.unFocus,
           child: Form(
-            key: controller.formKey,
+            key: controller.adminTaskDetailFormKey,
             child: SingleChildScrollView(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
@@ -80,7 +79,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
                             const SizedBox(width: 10.0),
                             Expanded(
                               child: CustomButton(
-                                key: const Key(TestKey.updateButton),
                                   label: 'Update',
                                   onPressed: () {
                                     controller.updateTask();
@@ -90,7 +88,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
                         )
                       else
                         CustomButton(
-                            key: const Key(TestKey.createButton),
                             label: 'Create',
                             onPressed: () {
                               controller.createTask();
@@ -113,7 +110,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Title', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
-          key: const Key(TestKey.titleField),
           controller: controller.titleController,
           validator: (value) => Validator.validateEmpty(value!),
         ),
@@ -128,7 +124,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Task Description', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
-          key: const Key(TestKey.descriptionField),
           controller: controller.descriptionController,
           maxLines: 5,
           validator: (value) => Validator.validateEmpty(value!),
@@ -147,7 +142,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
               return const CircularProgressIndicator();
             }
             return _buildDropdown(
-              key: const Key(TestKey.assignedToField),
               label: 'Assigned to',
               value: controller.assignToSelected.value.isEmpty
                   ? null
@@ -173,7 +167,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
               return const CircularProgressIndicator();
             }
             return _buildDropdown(
-                key: const Key(TestKey.statusField),
               label: 'Status',
               value: controller.statusSelected.value.isEmpty
                   ? null
@@ -198,15 +191,13 @@ class AdminTaskDetailScreen extends StatelessWidget {
       required String? value,
       required Iterable<DropdownMenuItem<String>> items,
       required ValueChanged<String?> onChanged,
-      required String hint,
-      required Key key}) {
+      required String hint}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomDropdownButton(
-          key: key,
           validator: (value) => Validator.validateEmpty(value!),
           selectedValue: value,
           items: [
@@ -230,7 +221,6 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Deadline', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
-          key: const Key(TestKey.deadlineField),
           readOnly: true,
           prefixIcon: const Icon(Icons.calendar_today),
           controller: controller.dueDateController,

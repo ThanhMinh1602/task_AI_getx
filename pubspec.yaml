@@ -48,6 +48,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.13
+  fake_cloud_firestore: ^3.1.0
   flutter_gen_runner: ^5.8.0
   flutter_lints: ^4.0.0
   flutter_test:

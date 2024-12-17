@@ -21,7 +21,7 @@ class MemberTaskDetailController extends GetxController {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dueDateController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final memberTaskDetailFormKey = GlobalKey<FormState>();
   final task = TaskModel().obs;
   final users = <UserModel>[].obs;
   final status = <StatusModel>[].obs;
@@ -72,7 +72,7 @@ class MemberTaskDetailController extends GetxController {
   }
 
   Future<void> createTask() async {
-    if (formKey.currentState!.validate()) {
+    if (memberTaskDetailFormKey.currentState!.validate()) {
       final taskCreate = TaskModel(
         title: titleController.text,
         description: descriptionController.text,
@@ -92,7 +92,7 @@ class MemberTaskDetailController extends GetxController {
   }
 
   Future<void> updateTask() async {
-    if (formKey.currentState!.validate()) {
+    if (memberTaskDetailFormKey.currentState!.validate()) {
       final taskUpdate = task.value.copyWith(
         status: statusSelected.value,
       );

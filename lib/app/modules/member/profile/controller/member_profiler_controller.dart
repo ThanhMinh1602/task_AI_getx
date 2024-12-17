@@ -15,7 +15,7 @@ class MemberProfileController extends GetxController {
       required IAuthRepository authRepository})
       : _userRepository = userRepository,
         _authRepository = authRepository;
-  final formKey = GlobalKey<FormState>();
+  final memberProfileFormKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
@@ -38,7 +38,7 @@ class MemberProfileController extends GetxController {
   }
 
   Future<void> updateMember() async {
-    if (formKey.currentState!.validate()) {
+    if (memberProfileFormKey.currentState!.validate()) {
       EasyLoading.show(status: 'Updating...');
       final userId = await SharedPrefService.getUserId();
       final user = await _userRepository.getById(userId!);
@@ -57,7 +57,7 @@ class MemberProfileController extends GetxController {
   }
 
   Future<void> changePassword() async {
-    if (formKey.currentState!.validate()) {
+    if (memberProfileFormKey.currentState!.validate()) {
       EasyLoading.show(status: 'Updating...');
       final userId = await SharedPrefService.getUserId();
 

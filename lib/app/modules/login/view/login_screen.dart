@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task/app/modules/login/controllers/login_controller.dart';
 import 'package:task/core/constants/app_color.dart';
-import 'package:task/core/constants/test_key.dart';
 import 'package:task/core/utils/validator.dart';
 import 'package:task/core/widgets/custom_button.dart';
 import 'package:task/core/widgets/custom_logo.dart';
@@ -21,7 +20,7 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
             child: Form(
-              key: loginController.formKey,
+              key: loginController.loginFormKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -31,14 +30,14 @@ class LoginScreen extends StatelessWidget {
                     const CustomLogo(width: 50),
                   const SizedBox(height: 70),
                   _buildTextField(
-                    key: const Key(TestKey.emailField),
+                    key: const Key('emailField'),
                     controller: loginController.emailController,
                     hintText: 'Email',
                     prefixIcon: const Icon(Icons.email),
                   ),
                   const SizedBox(height: 16),
                   _buildTextField(
-                    key: const Key(TestKey.passwordField),
+                    key: const Key('passwordField'),
                     controller: loginController.passwordController,
                     hintText: 'Password',
                     isPassword: true,
@@ -46,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 70),
                   CustomButton(
-                    key: const Key(TestKey.loginButton),
+                    key: const Key('loginButton'),
                     label: 'Login',
                     onPressed: loginController.login,
                   ),
@@ -63,8 +62,8 @@ class LoginScreen extends StatelessWidget {
       {required TextEditingController controller,
       required String hintText,
       required Widget prefixIcon,
-      Key? key,
-      bool isPassword = false}) {
+      bool isPassword = false,
+      Key? key}) {
     return CustomTextField(
       key: key,
       controller: controller,

@@ -16,7 +16,7 @@ class AdminMemberDetailController extends GetxController {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final adminMemberDetailFormKey = GlobalKey<FormState>();
   final userModel = UserModel().obs;
 
   final isNewMember = false.obs;
@@ -46,7 +46,7 @@ class AdminMemberDetailController extends GetxController {
     final random = Random();
     final randomIndex = random.nextInt(avts.length);
     final randomAvt = avts[randomIndex];
-    if (formKey.currentState!.validate()) {
+    if (adminMemberDetailFormKey.currentState!.validate()) {
       EasyLoading.show(status: 'Creating member...');
       final user = UserModel(
         name: nameController.text,

@@ -10,22 +10,19 @@ class LoginController extends GetxController {
 
   LoginController({required IAuthRepository authRepository})
       : _authRepository = authRepository;
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
-
+  final loginFormKey = GlobalKey<FormState>();
   Future<void> login() async {
-    if (formKey.currentState!.validate()) {
-      final email = emailController.text.trim();
-      final password = passwordController.text;
+    if (loginFormKey.currentState!.validate()) {
       EasyLoading.show(status: 'Logging in...');
       try {
-        final result = await _authRepository.login(email, password);
+        final result = await _authRepository.login(
+            emailController.text, passwordController.text);
         if (result != null) {
           await SharedPrefService.saveUserId(result.id);
           await SharedPrefService.saveRole(result.role ?? '');
+
           switch (result.role) {
             case 'admin':
               Get.offAllNamed(AppRoutes.ADMIN_MAIN);

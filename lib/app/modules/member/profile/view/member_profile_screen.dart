@@ -29,7 +29,7 @@ class MemberProfileScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
               child: CustomCard(
                 child: Form(
-                  key: memberController.formKey,
+                  key: memberController.memberProfileFormKey,
                   child: Column(
                     children: [
                       _buildAvatar(),

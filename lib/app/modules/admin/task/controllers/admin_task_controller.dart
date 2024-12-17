@@ -38,7 +38,6 @@ class AdminTaskController extends GetxController {
 
   Future<void> _getMembers() async {
     members.value = await _userRepository.getAll();
-    print(members);
   }
 
   Future<void> _goToPage(String route, {dynamic arguments}) async {

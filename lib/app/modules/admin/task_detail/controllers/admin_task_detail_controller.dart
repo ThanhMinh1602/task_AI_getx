@@ -21,7 +21,7 @@ class AdminTaskDetailController extends GetxController {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final dueDateController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final adminTaskDetailFormKey = GlobalKey<FormState>();
   final task = TaskModel().obs;
   final users = <UserModel>[].obs;
   final status = <StatusModel>[].obs;
@@ -72,7 +72,7 @@ class AdminTaskDetailController extends GetxController {
   }
 
   Future<void> createTask() async {
-    if (formKey.currentState!.validate()) {
+    if (adminTaskDetailFormKey.currentState!.validate()) {
       final taskCreate = TaskModel(
         title: titleController.text,
         description: descriptionController.text,
@@ -92,7 +92,7 @@ class AdminTaskDetailController extends GetxController {
   }
 
   Future<void> updateTask() async {
-    if (formKey.currentState!.validate()) {
+    if (adminTaskDetailFormKey.currentState!.validate()) {
       final taskUpdate = task.value.copyWith(
         title: titleController.text,
         description: descriptionController.text,

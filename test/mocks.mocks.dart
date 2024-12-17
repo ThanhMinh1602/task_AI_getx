@@ -3,20 +3,35 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i8;
+import 'dart:ui' as _i18;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i2;
+import 'package:flutter/material.dart' as _i5;
+import 'package:get/get.dart' as _i6;
+import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
+import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:task/app/data/models/base/base_model.dart' as _i23;
 import 'package:task/app/data/models/task_model.dart' as _i3;
 import 'package:task/app/data/models/user_model.dart' as _i4;
-import 'package:task/app/data/repositories/auth_repository.dart' as _i11;
-import 'package:task/app/data/repositories/task_repository.dart' as _i10;
-import 'package:task/app/data/repositories/user_repository.dart' as _i13;
-import 'package:task/app/data/services/remote/auth_service.dart' as _i5;
-import 'package:task/app/data/services/remote/gemini_service.dart' as _i12;
-import 'package:task/app/data/services/remote/task_service.dart' as _i8;
-import 'package:task/app/data/services/remote/user_service.dart' as _i9;
+import 'package:task/app/data/repositories/auth_repository.dart' as _i13;
+import 'package:task/app/data/repositories/base/base_repository.dart' as _i24;
+import 'package:task/app/data/repositories/task_repository.dart' as _i12;
+import 'package:task/app/data/repositories/user_repository.dart' as _i15;
+import 'package:task/app/data/services/local/shared_pref_service.dart' as _i19;
+import 'package:task/app/data/services/remote/auth_service.dart' as _i7;
+import 'package:task/app/data/services/remote/gemini_service.dart' as _i14;
+import 'package:task/app/data/services/remote/task_service.dart' as _i10;
+import 'package:task/app/data/services/remote/user_service.dart' as _i11;
+import 'package:task/app/modules/admin/main/controllers/admin_main_controller.dart'
+    as _i22;
+import 'package:task/app/modules/admin/member/controllers/admin_member_controller.dart'
+    as _i20;
+import 'package:task/app/modules/admin/member_detail/controllers/admin_member_detail_controller.dart'
+    as _i21;
+import 'package:task/app/modules/login/controllers/login_controller.dart'
+    as _i16;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -73,16 +88,89 @@ class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
         );
 }
 
+class _FakeTextEditingController_4 extends _i1.SmartFake
+    implements _i5.TextEditingController {
+  _FakeTextEditingController_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGlobalKey_5<T extends _i5.State<_i5.StatefulWidget>>
+    extends _i1.SmartFake implements _i5.GlobalKey<T> {
+  _FakeGlobalKey_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeInternalFinalCallback_6<T> extends _i1.SmartFake
+    implements _i6.InternalFinalCallback<T> {
+  _FakeInternalFinalCallback_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRxList_7<E> extends _i1.SmartFake implements _i6.RxList<E> {
+  _FakeRxList_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRx_8<T> extends _i1.SmartFake implements _i6.Rx<T> {
+  _FakeRx_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRxBool_9 extends _i1.SmartFake implements _i6.RxBool {
+  _FakeRxBool_9(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRxInt_10 extends _i1.SmartFake implements _i6.RxInt {
+  _FakeRxInt_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i5.AuthService {
+class MockAuthService extends _i1.Mock implements _i7.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i4.UserModel?> login(
+  _i8.Future<_i4.UserModel?> login(
     String? email,
     String? password,
   ) =>
@@ -94,11 +182,11 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
             password,
           ],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<String> changePassword(
+  _i8.Future<String> changePassword(
     String? userId,
     String? oldPassword,
     String? newPassword,
@@ -112,7 +200,7 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
             newPassword,
           ],
         ),
-        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
           this,
           Invocation.method(
             #changePassword,
@@ -123,13 +211,13 @@ class MockAuthService extends _i1.Mock implements _i5.AuthService {
             ],
           ),
         )),
-      ) as _i6.Future<String>);
+      ) as _i8.Future<String>);
 }
 
 /// A class which mocks [TaskService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTaskService extends _i1.Mock implements _i8.TaskService {
+class MockTaskService extends _i1.Mock implements _i10.TaskService {
   MockTaskService() {
     _i1.throwOnMissingStub(this);
   }
@@ -159,74 +247,74 @@ class MockTaskService extends _i1.Mock implements _i8.TaskService {
       ) as _i3.TaskModel);
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getTasksByUser(String? userId) =>
+  _i8.Future<List<_i3.TaskModel>> getTasksByUser(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTasksByUser,
           [userId],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getTasksByStatus(String? status) =>
+  _i8.Future<List<_i3.TaskModel>> getTasksByStatus(String? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTasksByStatus,
           [status],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 
   @override
-  _i6.Future<_i3.TaskModel?> create(_i3.TaskModel? model) =>
+  _i8.Future<_i3.TaskModel?> create(_i3.TaskModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #create,
           [model],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<_i3.TaskModel?> update(_i3.TaskModel? model) =>
+  _i8.Future<_i3.TaskModel?> update(_i3.TaskModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #update,
           [model],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getAll() => (super.noSuchMethod(
+  _i8.Future<List<_i3.TaskModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 
   @override
-  _i6.Future<bool> delete(String? id) => (super.noSuchMethod(
+  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i6.Future<_i3.TaskModel?> getById(String? id) => (super.noSuchMethod(
+  _i8.Future<_i3.TaskModel?> getById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getById,
           [id],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<_i2.QuerySnapshot<Object?>> query({
+  _i8.Future<_i2.QuerySnapshot<Object?>> query({
     List<String>? whereFields,
     List<dynamic>? whereValues,
     String? orderBy,
@@ -245,7 +333,7 @@ class MockTaskService extends _i1.Mock implements _i8.TaskService {
             #limit: limit,
           },
         ),
-        returnValue: _i6.Future<_i2.QuerySnapshot<Object?>>.value(
+        returnValue: _i8.Future<_i2.QuerySnapshot<Object?>>.value(
             _FakeQuerySnapshot_2<Object?>(
           this,
           Invocation.method(
@@ -260,34 +348,34 @@ class MockTaskService extends _i1.Mock implements _i8.TaskService {
             },
           ),
         )),
-      ) as _i6.Future<_i2.QuerySnapshot<Object?>>);
+      ) as _i8.Future<_i2.QuerySnapshot<Object?>>);
 
   @override
-  _i6.Future<void> batchDelete(List<String>? ids) => (super.noSuchMethod(
+  _i8.Future<void> batchDelete(List<String>? ids) => (super.noSuchMethod(
         Invocation.method(
           #batchDelete,
           [ids],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i6.Future<void> batchUpdate(List<_i3.TaskModel>? models) =>
+  _i8.Future<void> batchUpdate(List<_i3.TaskModel>? models) =>
       (super.noSuchMethod(
         Invocation.method(
           #batchUpdate,
           [models],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i9.UserService {
+class MockUserService extends _i1.Mock implements _i11.UserService {
   MockUserService() {
     _i1.throwOnMissingStub(this);
   }
@@ -317,84 +405,84 @@ class MockUserService extends _i1.Mock implements _i9.UserService {
       ) as _i4.UserModel);
 
   @override
-  _i6.Future<_i4.UserModel?> getUserByEmail(String? email) =>
+  _i8.Future<_i4.UserModel?> getUserByEmail(String? email) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserByEmail,
           [email],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<_i4.UserModel?> create(_i4.UserModel? model) =>
+  _i8.Future<_i4.UserModel?> create(_i4.UserModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #create,
           [model],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<void> deleteUserAndTasks(String? userId) => (super.noSuchMethod(
+  _i8.Future<void> deleteUserAndTasks(String? userId) => (super.noSuchMethod(
         Invocation.method(
           #deleteUserAndTasks,
           [userId],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i6.Future<List<_i4.UserModel>> getAll() => (super.noSuchMethod(
+  _i8.Future<List<_i4.UserModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
-        returnValue: _i6.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i6.Future<List<_i4.UserModel>>);
+        returnValue: _i8.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
+      ) as _i8.Future<List<_i4.UserModel>>);
 
   @override
-  _i6.Future<_i4.UserModel?> fetchUserWithTasks(String? userId) =>
+  _i8.Future<_i4.UserModel?> fetchUserWithTasks(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUserWithTasks,
           [userId],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<_i4.UserModel?> update(_i4.UserModel? model) =>
+  _i8.Future<_i4.UserModel?> update(_i4.UserModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #update,
           [model],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<bool> delete(String? id) => (super.noSuchMethod(
+  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i6.Future<_i4.UserModel?> getById(String? id) => (super.noSuchMethod(
+  _i8.Future<_i4.UserModel?> getById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getById,
           [id],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<_i2.QuerySnapshot<Object?>> query({
+  _i8.Future<_i2.QuerySnapshot<Object?>> query({
     List<String>? whereFields,
     List<dynamic>? whereValues,
     String? orderBy,
@@ -413,7 +501,7 @@ class MockUserService extends _i1.Mock implements _i9.UserService {
             #limit: limit,
           },
         ),
-        returnValue: _i6.Future<_i2.QuerySnapshot<Object?>>.value(
+        returnValue: _i8.Future<_i2.QuerySnapshot<Object?>>.value(
             _FakeQuerySnapshot_2<Object?>(
           this,
           Invocation.method(
@@ -428,116 +516,116 @@ class MockUserService extends _i1.Mock implements _i9.UserService {
             },
           ),
         )),
-      ) as _i6.Future<_i2.QuerySnapshot<Object?>>);
+      ) as _i8.Future<_i2.QuerySnapshot<Object?>>);
 
   @override
-  _i6.Future<void> batchDelete(List<String>? ids) => (super.noSuchMethod(
+  _i8.Future<void> batchDelete(List<String>? ids) => (super.noSuchMethod(
         Invocation.method(
           #batchDelete,
           [ids],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i6.Future<void> batchUpdate(List<_i4.UserModel>? models) =>
+  _i8.Future<void> batchUpdate(List<_i4.UserModel>? models) =>
       (super.noSuchMethod(
         Invocation.method(
           #batchUpdate,
           [models],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [ITaskRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockITaskRepository extends _i1.Mock implements _i10.ITaskRepository {
+class MockITaskRepository extends _i1.Mock implements _i12.ITaskRepository {
   MockITaskRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getTasksByUser(String? userId) =>
+  _i8.Future<List<_i3.TaskModel>> getTasksByUser(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTasksByUser,
           [userId],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getTasksByStatus(String? status) =>
+  _i8.Future<List<_i3.TaskModel>> getTasksByStatus(String? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTasksByStatus,
           [status],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 
   @override
-  _i6.Future<_i3.TaskModel?> create(_i3.TaskModel? model) =>
+  _i8.Future<_i3.TaskModel?> create(_i3.TaskModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #create,
           [model],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<_i3.TaskModel?> update(_i3.TaskModel? model) =>
+  _i8.Future<_i3.TaskModel?> update(_i3.TaskModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #update,
           [model],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<bool> delete(String? id) => (super.noSuchMethod(
+  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i6.Future<_i3.TaskModel?> getById(String? id) => (super.noSuchMethod(
+  _i8.Future<_i3.TaskModel?> getById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getById,
           [id],
         ),
-        returnValue: _i6.Future<_i3.TaskModel?>.value(),
-      ) as _i6.Future<_i3.TaskModel?>);
+        returnValue: _i8.Future<_i3.TaskModel?>.value(),
+      ) as _i8.Future<_i3.TaskModel?>);
 
   @override
-  _i6.Future<List<_i3.TaskModel>> getAll() => (super.noSuchMethod(
+  _i8.Future<List<_i3.TaskModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
-        returnValue: _i6.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
-      ) as _i6.Future<List<_i3.TaskModel>>);
+        returnValue: _i8.Future<List<_i3.TaskModel>>.value(<_i3.TaskModel>[]),
+      ) as _i8.Future<List<_i3.TaskModel>>);
 }
 
 /// A class which mocks [IAuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthRepository extends _i1.Mock implements _i11.IAuthRepository {
+class MockIAuthRepository extends _i1.Mock implements _i13.IAuthRepository {
   MockIAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i4.UserModel?> login(
+  _i8.Future<_i4.UserModel?> login(
     String? email,
     String? password,
   ) =>
@@ -549,11 +637,11 @@ class MockIAuthRepository extends _i1.Mock implements _i11.IAuthRepository {
             password,
           ],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<String> changePassword(
+  _i8.Future<String> changePassword(
     String? userId,
     String? oldPassword,
     String? newPassword,
@@ -567,7 +655,7 @@ class MockIAuthRepository extends _i1.Mock implements _i11.IAuthRepository {
             newPassword,
           ],
         ),
-        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
           this,
           Invocation.method(
             #changePassword,
@@ -578,13 +666,13 @@ class MockIAuthRepository extends _i1.Mock implements _i11.IAuthRepository {
             ],
           ),
         )),
-      ) as _i6.Future<String>);
+      ) as _i8.Future<String>);
 }
 
 /// A class which mocks [GeminiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGeminiService extends _i1.Mock implements _i12.GeminiService {
+class MockGeminiService extends _i1.Mock implements _i14.GeminiService {
   MockGeminiService() {
     _i1.throwOnMissingStub(this);
   }
@@ -592,14 +680,14 @@ class MockGeminiService extends _i1.Mock implements _i12.GeminiService {
   @override
   String get apiKey => (super.noSuchMethod(
         Invocation.getter(#apiKey),
-        returnValue: _i7.dummyValue<String>(
+        returnValue: _i9.dummyValue<String>(
           this,
           Invocation.getter(#apiKey),
         ),
       ) as String);
 
   @override
-  _i6.Future<String> generateContent(
+  _i8.Future<String> generateContent(
     String? prompt,
     String? data,
   ) =>
@@ -611,7 +699,7 @@ class MockGeminiService extends _i1.Mock implements _i12.GeminiService {
             data,
           ],
         ),
-        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
           this,
           Invocation.method(
             #generateContent,
@@ -621,80 +709,1150 @@ class MockGeminiService extends _i1.Mock implements _i12.GeminiService {
             ],
           ),
         )),
-      ) as _i6.Future<String>);
+      ) as _i8.Future<String>);
 }
 
 /// A class which mocks [IUserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserRepository extends _i1.Mock implements _i13.IUserRepository {
+class MockIUserRepository extends _i1.Mock implements _i15.IUserRepository {
   MockIUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i4.UserModel?> getUserByEmail(String? email) =>
+  _i8.Future<_i4.UserModel?> getUserByEmail(String? email) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserByEmail,
           [email],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<bool> deleteUserAndTasks(String? userId) => (super.noSuchMethod(
+  _i8.Future<bool> deleteUserAndTasks(String? userId) => (super.noSuchMethod(
         Invocation.method(
           #deleteUserAndTasks,
           [userId],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i6.Future<_i4.UserModel?> create(_i4.UserModel? model) =>
+  _i8.Future<_i4.UserModel?> create(_i4.UserModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #create,
           [model],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<_i4.UserModel?> update(_i4.UserModel? model) =>
+  _i8.Future<_i4.UserModel?> update(_i4.UserModel? model) =>
       (super.noSuchMethod(
         Invocation.method(
           #update,
           [model],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<bool> delete(String? id) => (super.noSuchMethod(
+  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i6.Future<_i4.UserModel?> getById(String? id) => (super.noSuchMethod(
+  _i8.Future<_i4.UserModel?> getById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getById,
           [id],
         ),
-        returnValue: _i6.Future<_i4.UserModel?>.value(),
-      ) as _i6.Future<_i4.UserModel?>);
+        returnValue: _i8.Future<_i4.UserModel?>.value(),
+      ) as _i8.Future<_i4.UserModel?>);
 
   @override
-  _i6.Future<List<_i4.UserModel>> getAll() => (super.noSuchMethod(
+  _i8.Future<List<_i4.UserModel>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
-        returnValue: _i6.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i6.Future<List<_i4.UserModel>>);
+        returnValue: _i8.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
+      ) as _i8.Future<List<_i4.UserModel>>);
+}
+
+/// A class which mocks [LoginController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLoginController extends _i1.Mock implements _i16.LoginController {
+  MockLoginController() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.TextEditingController get emailController => (super.noSuchMethod(
+        Invocation.getter(#emailController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#emailController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.TextEditingController get passwordController => (super.noSuchMethod(
+        Invocation.getter(#passwordController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#passwordController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.GlobalKey<_i5.FormState> get loginFormKey => (super.noSuchMethod(
+        Invocation.getter(#loginFormKey),
+        returnValue: _FakeGlobalKey_5<_i5.FormState>(
+          this,
+          Invocation.getter(#loginFormKey),
+        ),
+      ) as _i5.GlobalKey<_i5.FormState>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
+        Invocation.getter(#onStart),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onStart),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
+        Invocation.getter(#onDelete),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onDelete),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  bool get initialized => (super.noSuchMethod(
+        Invocation.getter(#initialized),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  int get listeners => (super.noSuchMethod(
+        Invocation.getter(#listeners),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  _i8.Future<void> login() => (super.noSuchMethod(
+        Invocation.method(
+          #login,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  void update([
+    List<Object>? ids,
+    bool? condition = true,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [
+            ids,
+            condition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onInit() => super.noSuchMethod(
+        Invocation.method(
+          #onInit,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onReady() => super.noSuchMethod(
+        Invocation.method(
+          #onReady,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose() => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void $configureLifeCycle() => super.noSuchMethod(
+        Invocation.method(
+          #$configureLifeCycle,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListener(_i17.GetStateUpdate? listener) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void removeListener(_i18.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refresh() => super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refreshGroup(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #refreshGroup,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyChildrens() => super.noSuchMethod(
+        Invocation.method(
+          #notifyChildrens,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListenerId(
+    Object? id,
+    _i18.VoidCallback? listener,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #removeListenerId,
+          [
+            id,
+            listener,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListenerId(
+    Object? key,
+    _i17.GetStateUpdate? listener,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListenerId,
+          [
+            key,
+            listener,
+          ],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void disposeId(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #disposeId,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [SharedPrefService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPrefService extends _i1.Mock implements _i19.SharedPrefService {
+  MockSharedPrefService() {
+    _i1.throwOnMissingStub(this);
+  }
+}
+
+/// A class which mocks [AdminMemberController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAdminMemberController extends _i1.Mock
+    implements _i20.AdminMemberController {
+  MockAdminMemberController() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.RxList<_i4.UserModel> get members => (super.noSuchMethod(
+        Invocation.getter(#members),
+        returnValue: _FakeRxList_7<_i4.UserModel>(
+          this,
+          Invocation.getter(#members),
+        ),
+      ) as _i6.RxList<_i4.UserModel>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
+        Invocation.getter(#onStart),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onStart),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
+        Invocation.getter(#onDelete),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onDelete),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  bool get initialized => (super.noSuchMethod(
+        Invocation.getter(#initialized),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  int get listeners => (super.noSuchMethod(
+        Invocation.getter(#listeners),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  void onInit() => super.noSuchMethod(
+        Invocation.method(
+          #onInit,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i8.Future<void> innitialData() => (super.noSuchMethod(
+        Invocation.method(
+          #innitialData,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> goToMemberDetail(_i4.UserModel? user) => (super.noSuchMethod(
+        Invocation.method(
+          #goToMemberDetail,
+          [user],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> goToCreateMember() => (super.noSuchMethod(
+        Invocation.method(
+          #goToCreateMember,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  void update([
+    List<Object>? ids,
+    bool? condition = true,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [
+            ids,
+            condition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onReady() => super.noSuchMethod(
+        Invocation.method(
+          #onReady,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose() => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void $configureLifeCycle() => super.noSuchMethod(
+        Invocation.method(
+          #$configureLifeCycle,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListener(_i17.GetStateUpdate? listener) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void removeListener(_i18.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refresh() => super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refreshGroup(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #refreshGroup,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyChildrens() => super.noSuchMethod(
+        Invocation.method(
+          #notifyChildrens,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListenerId(
+    Object? id,
+    _i18.VoidCallback? listener,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #removeListenerId,
+          [
+            id,
+            listener,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListenerId(
+    Object? key,
+    _i17.GetStateUpdate? listener,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListenerId,
+          [
+            key,
+            listener,
+          ],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void disposeId(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #disposeId,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [AdminMemberDetailController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAdminMemberDetailController extends _i1.Mock
+    implements _i21.AdminMemberDetailController {
+  MockAdminMemberDetailController() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.TextEditingController get nameController => (super.noSuchMethod(
+        Invocation.getter(#nameController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#nameController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.TextEditingController get emailController => (super.noSuchMethod(
+        Invocation.getter(#emailController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#emailController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.TextEditingController get phoneController => (super.noSuchMethod(
+        Invocation.getter(#phoneController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#phoneController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.TextEditingController get passwordController => (super.noSuchMethod(
+        Invocation.getter(#passwordController),
+        returnValue: _FakeTextEditingController_4(
+          this,
+          Invocation.getter(#passwordController),
+        ),
+      ) as _i5.TextEditingController);
+
+  @override
+  _i5.GlobalKey<_i5.FormState> get adminMemberDetailFormKey =>
+      (super.noSuchMethod(
+        Invocation.getter(#adminMemberDetailFormKey),
+        returnValue: _FakeGlobalKey_5<_i5.FormState>(
+          this,
+          Invocation.getter(#adminMemberDetailFormKey),
+        ),
+      ) as _i5.GlobalKey<_i5.FormState>);
+
+  @override
+  _i6.Rx<_i4.UserModel> get userModel => (super.noSuchMethod(
+        Invocation.getter(#userModel),
+        returnValue: _FakeRx_8<_i4.UserModel>(
+          this,
+          Invocation.getter(#userModel),
+        ),
+      ) as _i6.Rx<_i4.UserModel>);
+
+  @override
+  _i6.RxBool get isNewMember => (super.noSuchMethod(
+        Invocation.getter(#isNewMember),
+        returnValue: _FakeRxBool_9(
+          this,
+          Invocation.getter(#isNewMember),
+        ),
+      ) as _i6.RxBool);
+
+  @override
+  _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
+        Invocation.getter(#onStart),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onStart),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
+        Invocation.getter(#onDelete),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onDelete),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  bool get initialized => (super.noSuchMethod(
+        Invocation.getter(#initialized),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  int get listeners => (super.noSuchMethod(
+        Invocation.getter(#listeners),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  _i8.Future<void> onInit() => (super.noSuchMethod(
+        Invocation.method(
+          #onInit,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> createMember() => (super.noSuchMethod(
+        Invocation.method(
+          #createMember,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> updateMember() => (super.noSuchMethod(
+        Invocation.method(
+          #updateMember,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> deleteMember(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteMember,
+          [id],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  void onClose() => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void update([
+    List<Object>? ids,
+    bool? condition = true,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [
+            ids,
+            condition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onReady() => super.noSuchMethod(
+        Invocation.method(
+          #onReady,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void $configureLifeCycle() => super.noSuchMethod(
+        Invocation.method(
+          #$configureLifeCycle,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListener(_i17.GetStateUpdate? listener) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void removeListener(_i18.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refresh() => super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refreshGroup(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #refreshGroup,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyChildrens() => super.noSuchMethod(
+        Invocation.method(
+          #notifyChildrens,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListenerId(
+    Object? id,
+    _i18.VoidCallback? listener,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #removeListenerId,
+          [
+            id,
+            listener,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListenerId(
+    Object? key,
+    _i17.GetStateUpdate? listener,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListenerId,
+          [
+            key,
+            listener,
+          ],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void disposeId(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #disposeId,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [AdminMainController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAdminMainController extends _i1.Mock
+    implements _i22.AdminMainController {
+  MockAdminMainController() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.RxInt get currentIndex => (super.noSuchMethod(
+        Invocation.getter(#currentIndex),
+        returnValue: _FakeRxInt_10(
+          this,
+          Invocation.getter(#currentIndex),
+        ),
+      ) as _i6.RxInt);
+
+  @override
+  set currentIndex(_i6.RxInt? _currentIndex) => super.noSuchMethod(
+        Invocation.setter(
+          #currentIndex,
+          _currentIndex,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
+        Invocation.getter(#onStart),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onStart),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
+        Invocation.getter(#onDelete),
+        returnValue: _FakeInternalFinalCallback_6<void>(
+          this,
+          Invocation.getter(#onDelete),
+        ),
+      ) as _i6.InternalFinalCallback<void>);
+
+  @override
+  bool get initialized => (super.noSuchMethod(
+        Invocation.getter(#initialized),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  int get listeners => (super.noSuchMethod(
+        Invocation.getter(#listeners),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  void changeTab(int? index) => super.noSuchMethod(
+        Invocation.method(
+          #changeTab,
+          [index],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void logOut() => super.noSuchMethod(
+        Invocation.method(
+          #logOut,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void update([
+    List<Object>? ids,
+    bool? condition = true,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [
+            ids,
+            condition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onInit() => super.noSuchMethod(
+        Invocation.method(
+          #onInit,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onReady() => super.noSuchMethod(
+        Invocation.method(
+          #onReady,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose() => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void $configureLifeCycle() => super.noSuchMethod(
+        Invocation.method(
+          #$configureLifeCycle,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListener(_i17.GetStateUpdate? listener) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void removeListener(_i18.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refresh() => super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void refreshGroup(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #refreshGroup,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyChildrens() => super.noSuchMethod(
+        Invocation.method(
+          #notifyChildrens,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListenerId(
+    Object? id,
+    _i18.VoidCallback? listener,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #removeListenerId,
+          [
+            id,
+            listener,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i17.Disposer addListenerId(
+    Object? key,
+    _i17.GetStateUpdate? listener,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addListenerId,
+          [
+            key,
+            listener,
+          ],
+        ),
+        returnValue: () {},
+      ) as _i17.Disposer);
+
+  @override
+  void disposeId(Object? id) => super.noSuchMethod(
+        Invocation.method(
+          #disposeId,
+          [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [IBaseRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIBaseRepository<T extends _i23.BaseModel> extends _i1.Mock
+    implements _i24.IBaseRepository<T> {
+  MockIBaseRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<T?> create(T? model) => (super.noSuchMethod(
+        Invocation.method(
+          #create,
+          [model],
+        ),
+        returnValue: _i8.Future<T?>.value(),
+      ) as _i8.Future<T?>);
+
+  @override
+  _i8.Future<T?> update(T? model) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [model],
+        ),
+        returnValue: _i8.Future<T?>.value(),
+      ) as _i8.Future<T?>);
+
+  @override
+  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [id],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<T?> getById(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getById,
+          [id],
+        ),
+        returnValue: _i8.Future<T?>.value(),
+      ) as _i8.Future<T?>);
+
+  @override
+  _i8.Future<List<T>> getAll() => (super.noSuchMethod(
+        Invocation.method(
+          #getAll,
+          [],
+        ),
+        returnValue: _i8.Future<List<T>>.value(<T>[]),
+      ) as _i8.Future<List<T>>);
 }
