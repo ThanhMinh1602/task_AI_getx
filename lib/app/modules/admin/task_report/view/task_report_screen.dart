@@ -24,17 +24,16 @@ class TaskReportScreen extends StatelessWidget {
             Assets.images.googleGeminiLogo.path,
             width: 80,
           ),
-          backgroundColor: Colors
-              .transparent, // Make background transparent to apply gradient
+          backgroundColor: Colors.transparent,
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFFDFE4F1), // Bạn có thể thay đổi màu sắc này
-                  Color(0xFFB0C7D2), // Thêm một màu khác cho gradient
+                  Color(0xFFDFE4F1),
+                  Color(0xFFB0C7D2),
                 ],
-                begin: Alignment.topLeft, // Vị trí bắt đầu gradient
-                end: Alignment.bottomRight, // Vị trí kết thúc gradient
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
           ),

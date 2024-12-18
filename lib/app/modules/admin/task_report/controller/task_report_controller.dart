@@ -97,39 +97,4 @@ class TaskReportController extends GetxController {
       isLoading.value = false;
     }
   }
-
-// Future<void> getUserWithTasks(String userId) async {
-//   try {
-//     // Truy vấn thông tin User
-//     final userSnapshot = await FirebaseFirestore.instance.collection('users').doc(userId).get();
-
-//     if (userSnapshot.exists) {
-//       // Lấy thông tin người dùng
-//       UserModel user = UserModel.fromJson(userSnapshot.data() as Map<String, dynamic>);
-
-//       // Truy vấn tất cả các task có assignTo là userId
-//       final taskSnapshot = await FirebaseFirestore.instance
-//           .collection('tasks')
-//           .where('assignTo', isEqualTo: userId)
-//           .get();
-
-//       // Lấy danh sách các task của người dùng
-//       List<TaskModel> tasks = taskSnapshot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
-
-//       // Cập nhật thông tin của user với danh sách tasks
-//       user = UserModel.fromJson(userSnapshot.data() as Map<String, dynamic>);
-
-//       // Thực hiện xử lý với dữ liệu user và task
-//       print('User: ${user.name}');
-//       print('Tasks:');
-//       for (var task in user.tasks) {
-//         print('- ${task.title}');
-//       }
-//     } else {
-//       print('User not found');
-//     }
-//   } catch (e) {
-//     print('Error fetching user and tasks: $e');
-//   }
-// }
 }

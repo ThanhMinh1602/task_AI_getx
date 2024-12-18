@@ -10,13 +10,13 @@ import 'package:task/app/data/services/remote/user_service.dart';
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
-    // Đăng ký service
+    
     Get.put<UserService>(UserService());
     Get.put<TaskService>(TaskService());
     Get.put<AuthService>(AuthService());
     Get.put<GeminiService>(GeminiService());
 
-    //Đăng ký repository
+    
     Get.put<IUserRepository>(UserRepositoryImpl(userService: Get.find()));
     Get.put<ITaskRepository>(TaskRepositoryImpl(taskService: Get.find()));
     Get.put<IAuthRepository>(AuthRepositoryImpl(authService: Get.find()));
