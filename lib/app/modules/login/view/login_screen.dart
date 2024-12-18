@@ -9,7 +9,7 @@ import 'package:task/core/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final loginController = Get.find<LoginController>();
+  final LoginController loginController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,38 +19,37 @@ class LoginScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
-            child: Form(
-              key: loginController.loginFormKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (Get.arguments != null)
-                    Hero(tag: Get.arguments, child: const CustomLogo(width: 50))
-                  else
-                    const CustomLogo(width: 50),
-                  const SizedBox(height: 70),
-                  _buildTextField(
-                    key: const Key('emailField'),
-                    controller: loginController.emailController,
-                    hintText: 'Email',
-                    prefixIcon: const Icon(Icons.email),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (Get.arguments != null)
+                  Hero(tag: Get.arguments, child: const CustomLogo(width: 50))
+                else
+                  const CustomLogo(
+                    width: 50,
                   ),
-                  const SizedBox(height: 16),
-                  _buildTextField(
-                    key: const Key('passwordField'),
-                    controller: loginController.passwordController,
-                    hintText: 'Password',
-                    isPassword: true,
-                    prefixIcon: const Icon(Icons.lock),
-                  ),
-                  const SizedBox(height: 70),
-                  CustomButton(
-                    key: const Key('loginButton'),
-                    label: 'Login',
-                    onPressed: loginController.login,
-                  ),
-                ],
-              ),
+                const SizedBox(height: 70),
+                _buildTextField(
+                  key: const Key('emailField'),
+                  controller: loginController.emailController,
+                  hintText: 'Email',
+                  prefixIcon: const Icon(Icons.email),
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  key: const Key('passwordField'),
+                  controller: loginController.passwordController,
+                  hintText: 'Password',
+                  isPassword: true,
+                  prefixIcon: const Icon(Icons.lock),
+                ),
+                const SizedBox(height: 70),
+                CustomButton(
+                  key: const Key('loginButton'),
+                  label: 'Login',
+                  onPressed: loginController.login,
+                ),
+              ],
             ),
           ),
         ),

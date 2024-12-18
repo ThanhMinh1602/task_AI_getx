@@ -12,24 +12,21 @@ import 'package:get/get.dart' as _i6;
 import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i9;
-import 'package:task/app/data/models/base/base_model.dart' as _i23;
 import 'package:task/app/data/models/task_model.dart' as _i3;
 import 'package:task/app/data/models/user_model.dart' as _i4;
 import 'package:task/app/data/repositories/auth_repository.dart' as _i13;
-import 'package:task/app/data/repositories/base/base_repository.dart' as _i24;
 import 'package:task/app/data/repositories/task_repository.dart' as _i12;
-import 'package:task/app/data/repositories/user_repository.dart' as _i15;
-import 'package:task/app/data/services/local/shared_pref_service.dart' as _i19;
+import 'package:task/app/data/repositories/user_repository.dart' as _i14;
 import 'package:task/app/data/services/remote/auth_service.dart' as _i7;
-import 'package:task/app/data/services/remote/gemini_service.dart' as _i14;
+import 'package:task/app/data/services/remote/gemini_service.dart' as _i15;
 import 'package:task/app/data/services/remote/task_service.dart' as _i10;
 import 'package:task/app/data/services/remote/user_service.dart' as _i11;
 import 'package:task/app/modules/admin/main/controllers/admin_main_controller.dart'
-    as _i22;
-import 'package:task/app/modules/admin/member/controllers/admin_member_controller.dart'
-    as _i20;
-import 'package:task/app/modules/admin/member_detail/controllers/admin_member_detail_controller.dart'
     as _i21;
+import 'package:task/app/modules/admin/member/controllers/admin_member_controller.dart'
+    as _i19;
+import 'package:task/app/modules/admin/member_detail/controllers/admin_member_detail_controller.dart'
+    as _i20;
 import 'package:task/app/modules/login/controllers/login_controller.dart'
     as _i16;
 
@@ -99,20 +96,9 @@ class _FakeTextEditingController_4 extends _i1.SmartFake
         );
 }
 
-class _FakeGlobalKey_5<T extends _i5.State<_i5.StatefulWidget>>
-    extends _i1.SmartFake implements _i5.GlobalKey<T> {
-  _FakeGlobalKey_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeInternalFinalCallback_6<T> extends _i1.SmartFake
+class _FakeInternalFinalCallback_5<T> extends _i1.SmartFake
     implements _i6.InternalFinalCallback<T> {
-  _FakeInternalFinalCallback_6(
+  _FakeInternalFinalCallback_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -121,8 +107,19 @@ class _FakeInternalFinalCallback_6<T> extends _i1.SmartFake
         );
 }
 
-class _FakeRxList_7<E> extends _i1.SmartFake implements _i6.RxList<E> {
-  _FakeRxList_7(
+class _FakeRxList_6<E> extends _i1.SmartFake implements _i6.RxList<E> {
+  _FakeRxList_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGlobalKey_7<T extends _i5.State<_i5.StatefulWidget>>
+    extends _i1.SmartFake implements _i5.GlobalKey<T> {
+  _FakeGlobalKey_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -669,53 +666,10 @@ class MockIAuthRepository extends _i1.Mock implements _i13.IAuthRepository {
       ) as _i8.Future<String>);
 }
 
-/// A class which mocks [GeminiService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockGeminiService extends _i1.Mock implements _i14.GeminiService {
-  MockGeminiService() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  String get apiKey => (super.noSuchMethod(
-        Invocation.getter(#apiKey),
-        returnValue: _i9.dummyValue<String>(
-          this,
-          Invocation.getter(#apiKey),
-        ),
-      ) as String);
-
-  @override
-  _i8.Future<String> generateContent(
-    String? prompt,
-    String? data,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #generateContent,
-          [
-            prompt,
-            data,
-          ],
-        ),
-        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
-          this,
-          Invocation.method(
-            #generateContent,
-            [
-              prompt,
-              data,
-            ],
-          ),
-        )),
-      ) as _i8.Future<String>);
-}
-
 /// A class which mocks [IUserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserRepository extends _i1.Mock implements _i15.IUserRepository {
+class MockIUserRepository extends _i1.Mock implements _i14.IUserRepository {
   MockIUserRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -787,6 +741,49 @@ class MockIUserRepository extends _i1.Mock implements _i15.IUserRepository {
       ) as _i8.Future<List<_i4.UserModel>>);
 }
 
+/// A class which mocks [GeminiService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGeminiService extends _i1.Mock implements _i15.GeminiService {
+  MockGeminiService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get apiKey => (super.noSuchMethod(
+        Invocation.getter(#apiKey),
+        returnValue: _i9.dummyValue<String>(
+          this,
+          Invocation.getter(#apiKey),
+        ),
+      ) as String);
+
+  @override
+  _i8.Future<String> generateContent(
+    String? prompt,
+    String? data,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #generateContent,
+          [
+            prompt,
+            data,
+          ],
+        ),
+        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
+          this,
+          Invocation.method(
+            #generateContent,
+            [
+              prompt,
+              data,
+            ],
+          ),
+        )),
+      ) as _i8.Future<String>);
+}
+
 /// A class which mocks [LoginController].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -814,18 +811,9 @@ class MockLoginController extends _i1.Mock implements _i16.LoginController {
       ) as _i5.TextEditingController);
 
   @override
-  _i5.GlobalKey<_i5.FormState> get loginFormKey => (super.noSuchMethod(
-        Invocation.getter(#loginFormKey),
-        returnValue: _FakeGlobalKey_5<_i5.FormState>(
-          this,
-          Invocation.getter(#loginFormKey),
-        ),
-      ) as _i5.GlobalKey<_i5.FormState>);
-
-  @override
   _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -834,7 +822,7 @@ class MockLoginController extends _i1.Mock implements _i16.LoginController {
   @override
   _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -1023,20 +1011,11 @@ class MockLoginController extends _i1.Mock implements _i16.LoginController {
       );
 }
 
-/// A class which mocks [SharedPrefService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSharedPrefService extends _i1.Mock implements _i19.SharedPrefService {
-  MockSharedPrefService() {
-    _i1.throwOnMissingStub(this);
-  }
-}
-
 /// A class which mocks [AdminMemberController].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAdminMemberController extends _i1.Mock
-    implements _i20.AdminMemberController {
+    implements _i19.AdminMemberController {
   MockAdminMemberController() {
     _i1.throwOnMissingStub(this);
   }
@@ -1044,7 +1023,7 @@ class MockAdminMemberController extends _i1.Mock
   @override
   _i6.RxList<_i4.UserModel> get members => (super.noSuchMethod(
         Invocation.getter(#members),
-        returnValue: _FakeRxList_7<_i4.UserModel>(
+        returnValue: _FakeRxList_6<_i4.UserModel>(
           this,
           Invocation.getter(#members),
         ),
@@ -1053,7 +1032,7 @@ class MockAdminMemberController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -1062,7 +1041,7 @@ class MockAdminMemberController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -1275,7 +1254,7 @@ class MockAdminMemberController extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAdminMemberDetailController extends _i1.Mock
-    implements _i21.AdminMemberDetailController {
+    implements _i20.AdminMemberDetailController {
   MockAdminMemberDetailController() {
     _i1.throwOnMissingStub(this);
   }
@@ -1320,7 +1299,7 @@ class MockAdminMemberDetailController extends _i1.Mock
   _i5.GlobalKey<_i5.FormState> get adminMemberDetailFormKey =>
       (super.noSuchMethod(
         Invocation.getter(#adminMemberDetailFormKey),
-        returnValue: _FakeGlobalKey_5<_i5.FormState>(
+        returnValue: _FakeGlobalKey_7<_i5.FormState>(
           this,
           Invocation.getter(#adminMemberDetailFormKey),
         ),
@@ -1347,7 +1326,7 @@ class MockAdminMemberDetailController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -1356,7 +1335,7 @@ class MockAdminMemberDetailController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -1570,7 +1549,7 @@ class MockAdminMemberDetailController extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAdminMainController extends _i1.Mock
-    implements _i22.AdminMainController {
+    implements _i21.AdminMainController {
   MockAdminMainController() {
     _i1.throwOnMissingStub(this);
   }
@@ -1596,7 +1575,7 @@ class MockAdminMainController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -1605,7 +1584,7 @@ class MockAdminMainController extends _i1.Mock
   @override
   _i6.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_6<void>(
+        returnValue: _FakeInternalFinalCallback_5<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -1800,59 +1779,4 @@ class MockAdminMainController extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
-}
-
-/// A class which mocks [IBaseRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockIBaseRepository<T extends _i23.BaseModel> extends _i1.Mock
-    implements _i24.IBaseRepository<T> {
-  MockIBaseRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i8.Future<T?> create(T? model) => (super.noSuchMethod(
-        Invocation.method(
-          #create,
-          [model],
-        ),
-        returnValue: _i8.Future<T?>.value(),
-      ) as _i8.Future<T?>);
-
-  @override
-  _i8.Future<T?> update(T? model) => (super.noSuchMethod(
-        Invocation.method(
-          #update,
-          [model],
-        ),
-        returnValue: _i8.Future<T?>.value(),
-      ) as _i8.Future<T?>);
-
-  @override
-  _i8.Future<bool> delete(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [id],
-        ),
-        returnValue: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
-
-  @override
-  _i8.Future<T?> getById(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #getById,
-          [id],
-        ),
-        returnValue: _i8.Future<T?>.value(),
-      ) as _i8.Future<T?>);
-
-  @override
-  _i8.Future<List<T>> getAll() => (super.noSuchMethod(
-        Invocation.method(
-          #getAll,
-          [],
-        ),
-        returnValue: _i8.Future<List<T>>.value(<T>[]),
-      ) as _i8.Future<List<T>>);
 }

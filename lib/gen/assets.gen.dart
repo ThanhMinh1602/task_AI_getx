@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Google_Gemini_logo.png
+  AssetGenImage get googleGeminiLogo =>
+      const AssetGenImage('assets/images/Google_Gemini_logo.png');
+
   /// File path: assets/images/avatar_null.png
   AssetGenImage get avatarNull =>
       const AssetGenImage('assets/images/avatar_null.png');
@@ -35,7 +39,8 @@ class $AssetsImagesGen {
   String get logo => 'assets/images/logo.svg';
 
   /// List of all assets
-  List<dynamic> get values => [avatarNull, avt1, avt2, avt3, avt4, avt5, logo];
+  List<dynamic> get values =>
+      [googleGeminiLogo, avatarNull, avt1, avt2, avt3, avt4, avt5, logo];
 }
 
 class $AssetsJsonsGen {

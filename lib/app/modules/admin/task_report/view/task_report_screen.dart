@@ -5,6 +5,7 @@ import 'package:task/core/constants/app_color.dart';
 import 'package:task/core/constants/app_style.dart';
 import 'package:task/core/widgets/custom_background.dart';
 import 'package:task/core/widgets/custom_text_field.dart';
+import 'package:task/gen/assets.gen.dart';
 
 class TaskReportScreen extends StatelessWidget {
   TaskReportScreen({super.key});
@@ -19,8 +20,24 @@ class TaskReportScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Assistant'),
-          backgroundColor: AppColor.kDFE4F1,
+          title: Image.asset(
+            Assets.images.googleGeminiLogo.path,
+            width: 80,
+          ),
+          backgroundColor: Colors
+              .transparent, // Make background transparent to apply gradient
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFFDFE4F1), // Bạn có thể thay đổi màu sắc này
+                  Color(0xFFB0C7D2), // Thêm một màu khác cho gradient
+                ],
+                begin: Alignment.topLeft, // Vị trí bắt đầu gradient
+                end: Alignment.bottomRight, // Vị trí kết thúc gradient
+              ),
+            ),
+          ),
           actions: [
             SizedBox(
               width: 100,
@@ -32,17 +49,19 @@ class TaskReportScreen extends StatelessWidget {
                   ),
                   items: const [
                     DropdownMenuItem<GeminiType>(
-                        value: GeminiType.report,
-                        child: Text(
-                          'Gemini report',
-                          style: AppStyle.regular14,
-                        )),
+                      value: GeminiType.report,
+                      child: Text(
+                        'Gemini report',
+                        style: AppStyle.regular14,
+                      ),
+                    ),
                     DropdownMenuItem<GeminiType>(
-                        value: GeminiType.chat,
-                        child: Text(
-                          'Gemini chat',
-                          style: AppStyle.regular14,
-                        )),
+                      value: GeminiType.chat,
+                      child: Text(
+                        'Gemini chat',
+                        style: AppStyle.regular14,
+                      ),
+                    ),
                   ],
                   onChanged: (p0) {
                     controller.changeTypeGemini(p0!);

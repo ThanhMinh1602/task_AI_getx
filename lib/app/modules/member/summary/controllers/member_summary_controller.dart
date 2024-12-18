@@ -22,7 +22,8 @@ class MemberSummaryController extends GetxController {
   }
 
   Future<void> goToTaskDetail(TaskModel task) async {
-    await Get.toNamed(AppRoutes.ADMIN_TASK_DETAIL, arguments: task)!.then(
+    await Get.toNamed(AppRoutes.MEMBER_TASK_DETAIL, arguments: task)!
+        .then(
       (value) {
         if (value == true) {
           onInit();

@@ -20,13 +20,11 @@ import 'package:task/app/modules/login/controllers/login_controller.dart';
   UserService,
   ITaskRepository,
   IAuthRepository,
-  GeminiService,
   IUserRepository,
+  GeminiService,
   LoginController,
-  SharedPrefService,
   AdminMemberController,
   AdminMemberDetailController,
-  AdminMainController,
-  IBaseRepository
+  AdminMainController
 ])
 void main() {}

@@ -12,9 +12,8 @@ class LoginController extends GetxController {
       : _authRepository = authRepository;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final loginFormKey = GlobalKey<FormState>();
   Future<void> login() async {
-    if (loginFormKey.currentState!.validate()) {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       EasyLoading.show(status: 'Logging in...');
       try {
         final result = await _authRepository.login(

@@ -59,7 +59,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.ADMIN_MEMBER_DETAIL,
-      page: () => AdminMemberDetailScreen(),
+      page: () => const AdminMemberDetailScreen(),
       binding: AdminMemberDetailBinding(),
       transition: Transition.rightToLeft,
     ),
@@ -97,6 +97,7 @@ class AppPages {
       name: AppRoutes.MEMBER_TASK_DETAIL,
       page: () => MemberTaskDetailScreen(),
       binding: MemberTaskDetailBinding(),
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.MEMBER_SUMMARY_TASK_DETAIL,

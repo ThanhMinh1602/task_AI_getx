@@ -88,10 +88,11 @@ class AdminTaskDetailScreen extends StatelessWidget {
                         )
                       else
                         CustomButton(
-                            label: 'Create',
-                            onPressed: () {
-                              controller.createTask();
-                            }),
+                          key: const Key('createTaskButton'),
+                          label: 'Create',
+                          onPressed: () {
+                            controller.createTask();
+                          }),
                     ],
                   );
                 }),
@@ -110,6 +111,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Title', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
+          key: const Key('taskNameField'),
           controller: controller.titleController,
           validator: (value) => Validator.validateEmpty(value!),
         ),
@@ -124,6 +126,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Task Description', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
+          key: const Key('taskDescriptionField'),
           controller: controller.descriptionController,
           maxLines: 5,
           validator: (value) => Validator.validateEmpty(value!),
@@ -143,6 +146,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
             }
             return _buildDropdown(
               label: 'Assigned to',
+              key: const Key('taskAssigneeField'),
               value: controller.assignToSelected.value.isEmpty
                   ? null
                   : controller.assignToSelected.value,
@@ -168,6 +172,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
             }
             return _buildDropdown(
               label: 'Status',
+              key: const Key('taskStatusField'),
               value: controller.statusSelected.value.isEmpty
                   ? null
                   : controller.statusSelected.value,
@@ -191,13 +196,15 @@ class AdminTaskDetailScreen extends StatelessWidget {
       required String? value,
       required Iterable<DropdownMenuItem<String>> items,
       required ValueChanged<String?> onChanged,
-      required String hint}) {
+      required String hint,
+      required Key key}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomDropdownButton(
+          key: key,
           validator: (value) => Validator.validateEmpty(value!),
           selectedValue: value,
           items: [
@@ -221,6 +228,7 @@ class AdminTaskDetailScreen extends StatelessWidget {
         const Text('Deadline', style: AppStyle.medium14),
         const SizedBox(height: 10.0),
         CustomTextField(
+          key: const Key('deadlineField'),
           readOnly: true,
           prefixIcon: const Icon(Icons.calendar_today),
           controller: controller.dueDateController,
